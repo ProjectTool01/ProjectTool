@@ -24,5 +24,10 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/home")
+    public String main(Model model) {
+        model.addAttribute("message", "Тут будет главная страница");
+        return "home";
+    }
 
 }
