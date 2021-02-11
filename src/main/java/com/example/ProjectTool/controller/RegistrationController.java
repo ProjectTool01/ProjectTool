@@ -15,14 +15,14 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/registration")
-    public String registration(){
+    public String registration() {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model){
+    public String addUser(User user, Model model) {
 
-        if(!userService.addUser(user)){
+        if (!userService.addUser(user)) {
             model.addAttribute("message", "User Exists!");
             return "registration";
         }
@@ -31,15 +31,15 @@ public class RegistrationController {
     }
 
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code){
+    public String activate(Model model, @PathVariable String code) {
         boolean isActivate = userService.activateUser(code);
 
-        if(isActivate){
+        if (isActivate) {
             model.addAttribute("message", "Учетная запись активирована!");
         } else {
             model.addAttribute("message", "Код активации не найден");
         }
 
-        return("login");
+        return ("login");
     }
 }

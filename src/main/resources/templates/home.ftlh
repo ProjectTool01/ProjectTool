@@ -1,3 +1,5 @@
+<#include "parts/security.ftlh">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,12 @@ ${message}
 <form action="/logout" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="submit" value="Sign Out"/>
+    <#if isAdmin>
+        <li>
+            <a href="/user">User list</a>
+        </li>
+    </#if>
 </form>
-<a href="/greeting">Greeting page</a>
+<a href="/">Greeting page</a>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
     public boolean addUser(User user) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if(userFromDb != null){
+        if (userFromDb != null) {
             return false;
         }
 
@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
         user.setActivationCode(UUID.randomUUID().toString());
         userRepo.save(user);
 
-        if(!StringUtils.isEmpty(user.getEmail())){
+        if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Здравствуйте, %s! \n" +
                             "Ваша ссылка на активацию: http://localhost:8080/activate/%s",
@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
-        if(user == null){
+        if (user == null) {
             return false;
         }
 

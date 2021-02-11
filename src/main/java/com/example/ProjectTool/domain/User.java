@@ -12,7 +12,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name="user_seq", sequenceName="SEQ_USER", allocationSize = 1)
+    @SequenceGenerator(name = "user_seq", sequenceName = "SEQ_USER", allocationSize = 1)
     private Long id;
     private String username;
     private String password;
@@ -24,6 +24,10 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
 
     public Long getId() {
         return id;
