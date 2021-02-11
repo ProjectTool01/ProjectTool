@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Controller
-public class MainController {
+public class HomeController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -25,7 +25,7 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String main(Model model) {
+    public String home(Model model) {
         model.addAttribute("message", "Тут будет главная страница");
         return "home";
     }
