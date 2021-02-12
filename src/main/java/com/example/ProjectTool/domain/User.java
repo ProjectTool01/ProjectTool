@@ -15,6 +15,8 @@ public class User implements UserDetails {
     @SequenceGenerator(name = "user_seq", sequenceName = "SEQ_USER", allocationSize = 1)
     private Long id;
     private String username;
+    private String name;
+    private String surname;
     private String password;
     private boolean active;
     private String email;
@@ -25,7 +27,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
 
@@ -109,4 +111,21 @@ public class User implements UserDetails {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
 }
