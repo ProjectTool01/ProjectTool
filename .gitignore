@@ -1,5 +1,6 @@
 # Project exclude paths
 /target/
+/target/classes/
 log.txt
 .classpath
 .factorypath
