@@ -1,1 +1,7 @@
 # Project exclude paths
+.target/
+log.txt
+.classpath
+.factorypath
+.project
+.settings/
