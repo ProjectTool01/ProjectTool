@@ -21,11 +21,12 @@ location /img/ {
         alias /home/roman/uploads/;
 }
 ```
-
+Создать папку uploads в home директории:
 * sudo nginx -s reload
     * cd ~
     * mkdir uploads
 
+Выполнить установку в папке проекта:
 * sudo apt install maven
 * mvn install
 
@@ -33,4 +34,4 @@ location /img/ {
 * pgrep java | xargs kill -9
 
 Выпускаем бычка:
-* nohup java -jar WorkPix-1.0-SNAPSHOT.jar > log.txt &
+* nohup java -jar /target/WorkPix-1.0-SNAPSHOT.jar > log.txt &
