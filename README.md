@@ -34,4 +34,4 @@ location /img/ {
 * pgrep java | xargs kill -9
 
 Выпускаем бычка:
-* nohup java -jar /target/WorkPix-1.0-SNAPSHOT.jar > log.txt &
+* nohup java -jar target/WorkPix-1.0-SNAPSHOT.jar > log.txt &
