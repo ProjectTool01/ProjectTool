@@ -127,5 +127,4 @@ public class User implements UserDetails {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
 }

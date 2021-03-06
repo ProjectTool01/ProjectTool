@@ -9,14 +9,12 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "message_seq")
     @SequenceGenerator(name = "message_seq", sequenceName = "SEQ_MESSAGE", allocationSize = 1)
     private Long id;
-
     private String text;
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-
     private String filename;
 
     public Message() {
