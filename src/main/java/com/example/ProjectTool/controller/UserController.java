@@ -49,9 +49,11 @@ public class UserController {
     public String getMyProfile(Model model,
                                @AuthenticationPrincipal User user){
 
+        String nameAndSurname = user.getName() + " " + user.getSurname();
         model.addAttribute("avatar", user.getAvatar());
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
+        model.addAttribute("name", nameAndSurname);
 
         return "profile";
     }

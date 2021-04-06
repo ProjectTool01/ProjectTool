@@ -13,6 +13,6 @@ ${message!}
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <div><input type="submit" value="Sign In"/></div>
 </form>
-<a href="/ ">Greeting page</a>
+<a href="/registration">Регистрация</a>
 </body>
 </html>

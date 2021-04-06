@@ -18,6 +18,6 @@ ${message}
         </li>
     </#if>
 </form>
-<a href="/">Greeting page</a>
+<a href="/myprofile">мой профиль</a>
 </body>
 </html>

@@ -6,10 +6,11 @@
 </head>
 <body>
 My profile
-${email!}
-${username!}
-<br/><img src="/img/${avatar}" alt="avatar"><br/>
+${email!}<br/>
+${username!}<br/>
+${name!}<br/>
+<img src="/img/${avatar}" alt="avatar"><br/>
 
-<a href="/home">/home</a>
+<a href="/home">Домой</a>
 </body>
 </html>
