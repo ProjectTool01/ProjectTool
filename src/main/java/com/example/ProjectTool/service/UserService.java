@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -35,6 +35,7 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
+        user.setAvatar("defaultAvatar.jpg");
         user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
@@ -61,5 +62,23 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         userRepo.save(user);
         return true;
+    }
+
+    public List<User> findAll(){
+        return userRepo.findAll();
+    }
+
+    public void saveUser(User user, String username, Map<String, String> form) {
+        user.setUsername(username);
+        Set<String> roles = Arrays.stream(Role.values())
+                .map(Role::name)
+                .collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
+        userRepo.save(user);
     }
 }
