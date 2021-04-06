@@ -11,7 +11,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
-        return "greeting";
+        return "redirect:/home";
     }
 
     @GetMapping("/home")
