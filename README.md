@@ -28,7 +28,7 @@ location /img/ {
 
 Выполнить установку в папке проекта:
 * sudo apt install maven
-* mvn install
+* mvn clean install
 
 Убиваем предыдущий процесс java, если таковой присутствует:
 * pgrep java | xargs kill -9
