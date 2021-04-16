@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -41,6 +42,11 @@ public class UserService implements UserDetailsService {
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
+        sendMessage(user);
+        return true;
+    }
+
+    private void sendMessage(User user) {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Здравствуйте, %s! \n" +
@@ -50,7 +56,6 @@ public class UserService implements UserDetailsService {
             );
             mailSender.send(user.getEmail(), "Activation code", message);
         }
-        return true;
     }
 
     public boolean activateUser(String code) {
@@ -58,13 +63,16 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             return false;
         }
+        if (!user.getNewEmail().equals(user.getEmail())) {
+            user.setEmail(user.getNewEmail());
+        }
         user.setActivationCode(null);
         user.setActive(true);
         userRepo.save(user);
         return true;
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepo.findAll();
     }
 
@@ -80,5 +88,33 @@ public class UserService implements UserDetailsService {
             }
         }
         userRepo.save(user);
+    }
+
+    public void returnUserProfileData(User user, Model model) {
+        String nameAndSurname = user.getName() + " " + user.getSurname();
+        model.addAttribute("avatar", user.getAvatar());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("name", nameAndSurname);
+    }
+
+    public void changeUserData(User user, String password, String email) {
+        boolean isEmailChanged = (!email.isEmpty() && !email.equals(user.getEmail()));
+
+        if (isEmailChanged) {
+            user.setNewEmail(email);
+            if (!StringUtils.isEmpty(email)) {
+                user.setActivationCode(UUID.randomUUID().toString());
+            }
+        }
+
+        if (!StringUtils.isEmpty(password)) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
+
+        userRepo.save(user);
+        if (isEmailChanged) {
+            sendMessage(user);
+        }
     }
 }

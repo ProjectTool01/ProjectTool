@@ -2,6 +2,7 @@ package com.example.ProjectTool.controller;
 
 import com.example.ProjectTool.domain.Role;
 import com.example.ProjectTool.domain.User;
+import com.example.ProjectTool.repos.UserRepo;
 import com.example.ProjectTool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,21 +14,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepo userRepo;
+
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/users")
+    @GetMapping("/userlist")
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "userList";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/users/{user}")
+    @GetMapping("/userlist/{user}")
     public String userEditorForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
@@ -35,27 +39,67 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/users")
+    @PostMapping("/userlist")
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         userService.saveUser(user, username, form);
-        return "redirect:/users";
+        return "redirect:/user/userlist";
+    }
+
+    @GetMapping("/")
+    public String userMappingRedirect(){
+        return "redirect:/user/myprofile";
     }
 
     @GetMapping("/myprofile")
     public String getMyProfile(Model model,
-                               @AuthenticationPrincipal User user){
+                               @AuthenticationPrincipal User user
+    ) {
+        userService.returnUserProfileData(user, model);
 
-        String nameAndSurname = user.getName() + " " + user.getSurname();
-        model.addAttribute("avatar", user.getAvatar());
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("name", nameAndSurname);
+        return "userProfile";
+    }
 
-        return "profile";
+    @GetMapping("/myprofile/change")
+    public String getChangeMyProfileData(){
+        return "userProfileChangeData";
+    }
+
+    @PostMapping("/myprofile/change")
+    public String postChangeMyProfileData(@AuthenticationPrincipal User user,
+                                          @RequestParam String password,
+                                          @RequestParam String email
+    ){
+        userService.changeUserData(user, password, email);
+
+        return "redirect:/user/myprofile/change";
+    }
+
+    @GetMapping("/{id}")
+    public String getUserProfile(Model model,
+                                 @PathVariable String id,
+                                 @AuthenticationPrincipal User user
+    ) {
+        try {
+            long userId = Long.parseLong(id);
+            if (userRepo.findById(userId) == null) {
+                return "redirect:/home";
+            }
+            if (userId == user.getId()) {
+                return "redirect:/user/myprofile";
+            }
+
+            User userProfile = userRepo.findById(userId);
+            userService.returnUserProfileData(userProfile, model);
+
+        } catch (NumberFormatException e) {
+            return "redirect:/home";
+        }
+
+        return "userProfile";
     }
 
 }

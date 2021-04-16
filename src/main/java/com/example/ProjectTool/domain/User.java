@@ -20,6 +20,7 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
     private String email;
+    private String newEmail;
     private String activationCode;
     private String avatar;
 
@@ -135,5 +136,13 @@ public class User implements UserDetails {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    public void setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
     }
 }

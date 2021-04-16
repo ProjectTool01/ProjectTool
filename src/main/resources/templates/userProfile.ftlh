@@ -5,12 +5,13 @@
     <title>ProjectTool</title>
 </head>
 <body>
-My profile
+User Profile
 ${email!}<br/>
 ${username!}<br/>
 ${name!}<br/>
 <img src="/img/${avatar}" alt="avatar"><br/>
 
+<a href="/user/myprofile/change">Изменить</a>
 <a href="/home">Домой</a>
 </body>
 </html>

@@ -10,6 +10,7 @@ List of users
 <table>
     <thead>
     <tr>
+        <th>id</th>
         <th>Name</th>
         <th>Role</th>
         <th>Password</th>
@@ -19,9 +20,10 @@ List of users
     <body>
     <#list users as user>
         <tr>
+            <td>${user.id}</td>
             <td>${user.username}</td>
             <td><#list user.roles as role>${role}<#sep>, </#list></td>
-            <td><a href="/user/${user.id}">edit</a></td>
+            <td><a href="/user/userlist/${user.id}">edit</a></td>
         </tr>
     </#list>
     </body>

@@ -20,6 +20,7 @@ create table usr (
     activation_code varchar(255),
     active boolean not null,
     email varchar(255),
+    new_email varchar(255),
     password varchar(255) not null,
     username varchar(255) not null,
     name varchar(255) not null,

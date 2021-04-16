@@ -14,10 +14,10 @@ ${message}
     <input type="submit" value="Sign Out"/>
     <#if isAdmin>
         <li>
-            <a href="/user">User list</a>
+            <a href="/user/userlist">User list</a>
         </li>
     </#if>
 </form>
-<a href="/myprofile">мой профиль</a>
+<a href="/user/myprofile">мой профиль</a>
 </body>
 </html>
