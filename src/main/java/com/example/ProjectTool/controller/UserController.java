@@ -71,11 +71,17 @@ public class UserController {
     @PostMapping("/myprofile/change")
     public String postChangeMyProfileData(@AuthenticationPrincipal User user,
                                           @RequestParam String password,
-                                          @RequestParam String email
+                                          @RequestParam String email,
+                                          Model model
     ){
         userService.changeUserData(user, password, email);
-
-        return "redirect:/user/myprofile/change";
+        if(!password.isEmpty()){
+            model.addAttribute("changePasswordMessage", "Пароль успешно изменен!");
+        }
+        if(!email.isEmpty() && !email.equals(user.getEmail())){
+            model.addAttribute("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
+        }
+        return "userProfileChangeData";
     }
 
     @GetMapping("/{id}")

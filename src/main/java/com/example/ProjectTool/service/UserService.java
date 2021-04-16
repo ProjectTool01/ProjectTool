@@ -101,7 +101,6 @@ public class UserService implements UserDetailsService {
 
     public void changeUserData(User user, String password, String email) {
         boolean isEmailChanged = (!email.isEmpty() && !email.equals(user.getEmail()));
-
         if (isEmailChanged) {
             user.setNewEmail(email);
             if (!StringUtils.isEmpty(email)) {

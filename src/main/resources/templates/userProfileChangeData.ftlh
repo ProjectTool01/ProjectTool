@@ -12,6 +12,8 @@ Change data
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <div><input type="submit" value="Save"/></div>
 </form>
+${changePasswordMessage!}<br/>
+${changeEmailMessage!}<br/>
 <a href="/home">Домой</a>
 </body>
 </html>
