@@ -23,7 +23,7 @@ List of users
             <td>${user.id}</td>
             <td>${user.username}</td>
             <td><#list user.roles as role>${role}<#sep>, </#list></td>
-            <td><a href="/user/userlist/${user.id}">edit</a></td>
+            <td><a href="/user/list/${user.id}">edit</a></td>
         </tr>
     </#list>
     </body>

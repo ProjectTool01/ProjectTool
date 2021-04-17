@@ -24,29 +24,29 @@ public class UserController {
     private UserRepo userRepo;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/userlist")
+    @GetMapping("/list")
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "userList";
+        return "adminControlPanelUserList";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/userlist/{user}")
+    @GetMapping("/list/{user}")
     public String userEditorForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
-        return "userEdit";
+        return "adminControlPanelUserEdit";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/userlist")
+    @PostMapping("/list")
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         userService.saveUser(user, username, form);
-        return "redirect:/user/userlist";
+        return "redirect:/user/list";
     }
 
     @GetMapping("/")

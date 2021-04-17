@@ -14,7 +14,7 @@ ${message}
     <input type="submit" value="Sign Out"/>
     <#if isAdmin>
         <li>
-            <a href="/user/userlist">User list</a>
+            <a href="/user/list">User list</a>
         </li>
     </#if>
 </form>
