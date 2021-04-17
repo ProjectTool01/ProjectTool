@@ -1,5 +1,5 @@
 create sequence seq_message start 1 increment 1;
-create sequence seq_user start 2 increment 1;
+create sequence seq_user start 4 increment 1;
 
 create table message (
     id int8 not null,

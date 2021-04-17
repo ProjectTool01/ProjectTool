@@ -32,7 +32,7 @@ public class HomeController {
     public String getUserList(Model model, @RequestParam(required = false, defaultValue = "") String username) {
         List<User> users = userRepo.findAll();
         if (!username.isEmpty()) {
-            users = userRepo.findUsersByUsername(username);
+            users = userRepo.findUsersByUsername(username.toLowerCase());
         }
 
         model.addAttribute("filter", username);
