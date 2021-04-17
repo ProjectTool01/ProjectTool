@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String userMappingRedirect(){
+    public String userMappingRedirect() {
         return "redirect:/user/myprofile";
     }
 
@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @GetMapping("/myprofile/change")
-    public String getChangeMyProfileData(){
+    public String getChangeMyProfileData() {
         return "userProfileChangeData";
     }
 
@@ -73,12 +73,12 @@ public class UserController {
                                           @RequestParam String password,
                                           @RequestParam String email,
                                           Model model
-    ){
+    ) {
         userService.changeUserData(user, password, email);
-        if(!password.isEmpty()){
+        if (!password.isEmpty()) {
             model.addAttribute("changePasswordMessage", "Пароль успешно изменен!");
         }
-        if(!email.isEmpty() && !email.equals(user.getEmail())){
+        if (!email.isEmpty() && !email.equals(user.getEmail())) {
             model.addAttribute("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
         }
         return "userProfileChangeData";
