@@ -7,7 +7,7 @@
 <body>
     <span><a href="/home">Home page</a> </span>
     Список пользователей
-    <form method="get" action="/home/userlist">
+    <form method="get" action="/userlist">
         <input type="text" name="username" value="${username!}">
         <button type="submit">Найти по нику</button>
     </form>

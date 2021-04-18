@@ -28,7 +28,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/home/userlist")
+    @GetMapping("/userlist")
     public String getUserList(Model model, @RequestParam(required = false, defaultValue = "") String username) {
         List<User> users = userRepo.findAll();
         if (!username.isEmpty()) {
@@ -40,4 +40,9 @@ public class HomeController {
         return "allUsers";
     }
 
+    @GetMapping("/message")
+    public String getUserMessage(Model model){
+
+        return null;
+    }
 }

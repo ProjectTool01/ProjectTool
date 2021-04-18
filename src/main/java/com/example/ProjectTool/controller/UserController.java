@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -24,14 +23,14 @@ public class UserController {
     private UserRepo userRepo;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/list")
+    @GetMapping("/user/list")
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "adminControlPanelUserList";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/list/{user}")
+    @GetMapping("/user/list/{user}")
     public String userEditorForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
@@ -39,7 +38,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/list")
+    @PostMapping("/user/list")
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
@@ -49,9 +48,9 @@ public class UserController {
         return "redirect:/user/list";
     }
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public String userMappingRedirect() {
-        return "redirect:/user/myprofile";
+        return "redirect:/myprofile";
     }
 
     @GetMapping("/myprofile")
@@ -84,7 +83,7 @@ public class UserController {
         return "userProfileChangeData";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public String getUserProfile(Model model,
                                  @PathVariable String id,
                                  @AuthenticationPrincipal User user
@@ -95,7 +94,7 @@ public class UserController {
                 return "redirect:/home";
             }
             if (userId == user.getId()) {
-                return "redirect:/user/myprofile";
+                return "redirect:/myprofile";
             }
 
             User userProfile = userRepo.findById(userId);
@@ -107,5 +106,4 @@ public class UserController {
 
         return "userProfile";
     }
-
 }

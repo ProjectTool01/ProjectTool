@@ -1,49 +1,28 @@
 package com.example.ProjectTool.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @SuppressWarnings("ALL")
 @Entity
+@Table(name = "message")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String text;
-    private String tag;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User author;
-    private String filename;
+    @ManyToOne
+    @JoinColumn(name = "from_user")
+    private User fromUser;
 
-    public Message() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "to_user")
+    private User toUser;
 
-    public Message(String text, String tag, User user) {
-        this.author = user;
-        this.text = text;
-        this.tag = tag;
-    }
-
-    public String getAuthorName() {
-        return author != null ? author.getUsername() : "<none>";
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
-    }
+    @Column(name = "message_time")
+    private Timestamp messageTime;
 
     public Long getId() {
         return id;
@@ -53,19 +32,35 @@ public class Message {
         this.id = id;
     }
 
-    public String getTag() {
-        return tag;
+    public String getText() {
+        return text;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getFilename() {
-        return filename;
+    public User getFromUser() {
+        return fromUser;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setFromUser(User fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    public User getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(User toUser) {
+        this.toUser = toUser;
+    }
+
+    public Timestamp getMessageTime() {
+        return messageTime;
+    }
+
+    public void setMessageTime(Timestamp messageTime) {
+        this.messageTime = messageTime;
     }
 }
