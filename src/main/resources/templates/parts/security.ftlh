@@ -5,6 +5,7 @@ known = Session.SPRING_SECURITY_CONTEXT??
     <#assign
     user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
     name = user.getUsername()
+    profileAddress = user.getProfileAddress()
     isAdmin = user.isAdmin()
     >
 <#else>

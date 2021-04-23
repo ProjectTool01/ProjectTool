@@ -1,4 +1,4 @@
-create sequence seq_user start 4 increment 1;
+create sequence usr_sequence start 4 increment 1;
 
 create table usr
 (
@@ -12,16 +12,17 @@ create table usr
     name            varchar(255) not null,
     surname         varchar(255) not null,
     avatar          varchar(255) not null,
+    profile_address varchar(255) not null unique,
     primary key (id)
 );
 
 create table message
 (
-    id           int8 not null,
+    id           serial8 not null,
     text         text,
     message_time timestamp,
-    to_user      int8 not null,
-    from_user    int8 not null,
+    to_user      int8    not null,
+    from_user    int8    not null,
     primary key (id),
     foreign key (to_user) references usr,
     foreign key (from_user) references usr

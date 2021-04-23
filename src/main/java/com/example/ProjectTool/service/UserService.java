@@ -1,7 +1,7 @@
 package com.example.ProjectTool.service;
 
-import com.example.ProjectTool.domain.Role;
-import com.example.ProjectTool.domain.User;
+import com.example.ProjectTool.models.Role;
+import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,6 +36,8 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
+
+        user.setProfileAddress("id" + user.getId());
         user.setAvatar("defaultAvatar.jpg");
         user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));

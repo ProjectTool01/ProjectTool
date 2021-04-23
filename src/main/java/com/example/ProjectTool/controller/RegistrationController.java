@@ -1,6 +1,6 @@
 package com.example.ProjectTool.controller;
 
-import com.example.ProjectTool.domain.User;
+import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

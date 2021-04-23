@@ -1,4 +1,4 @@
-package com.example.ProjectTool.domain;
+package com.example.ProjectTool.models;
 
 import org.springframework.security.core.GrantedAuthority;
 

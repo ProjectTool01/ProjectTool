@@ -1,4 +1,4 @@
-package com.example.ProjectTool.domain;
+package com.example.ProjectTool.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "message")
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

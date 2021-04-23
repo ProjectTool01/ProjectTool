@@ -1,18 +1,22 @@
-package com.example.ProjectTool.domain;
+package com.example.ProjectTool.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String profileAddress;
     private String username;
     private String name;
     private String surname;
@@ -22,6 +26,14 @@ public class User implements UserDetails {
     private String newEmail;
     private String activationCode;
     private String avatar;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_project",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")}
+    )
+    private Set<Project> projects = new HashSet<>();
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -143,5 +155,21 @@ public class User implements UserDetails {
 
     public void setNewEmail(String newEmail) {
         this.newEmail = newEmail;
+    }
+
+    public String getProfileAddress() {
+        return profileAddress;
+    }
+
+    public void setProfileAddress(String profileAddress) {
+        this.profileAddress = profileAddress;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }

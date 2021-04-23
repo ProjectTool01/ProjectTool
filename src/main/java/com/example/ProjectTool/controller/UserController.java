@@ -1,7 +1,7 @@
 package com.example.ProjectTool.controller;
 
-import com.example.ProjectTool.domain.Role;
-import com.example.ProjectTool.domain.User;
+import com.example.ProjectTool.models.Role;
+import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.UserRepo;
 import com.example.ProjectTool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,24 +50,15 @@ public class UserController {
 
     @GetMapping("/user")
     public String userMappingRedirect() {
-        return "redirect:/myprofile";
+        return "redirect:/userlist";
     }
 
-    @GetMapping("/myprofile")
-    public String getMyProfile(Model model,
-                               @AuthenticationPrincipal User user
-    ) {
-        userService.returnUserProfileData(user, model);
-
-        return "userProfile";
-    }
-
-    @GetMapping("/myprofile/change")
+    @GetMapping("/user/change")
     public String getChangeMyProfileData() {
         return "userProfileChangeData";
     }
 
-    @PostMapping("/myprofile/change")
+    @PostMapping("/user/change")
     public String postChangeMyProfileData(@AuthenticationPrincipal User user,
                                           @RequestParam String password,
                                           @RequestParam String email,
@@ -83,26 +74,15 @@ public class UserController {
         return "userProfileChangeData";
     }
 
-    @GetMapping("/user/{id}")
-    public String getUserProfile(Model model,
-                                 @PathVariable String id,
-                                 @AuthenticationPrincipal User user
-    ) {
-        try {
-            long userId = Long.parseLong(id);
-            if (userRepo.findById(userId) == null) {
+    @GetMapping("/user/{profileAddress}")
+    public String getUserProfile(Model model, @PathVariable String profileAddress) {
+
+            if (userRepo.findByProfileAddress(profileAddress) == null) {
                 return "redirect:/home";
             }
-            if (userId == user.getId()) {
-                return "redirect:/myprofile";
-            }
 
-            User userProfile = userRepo.findById(userId);
+            User userProfile = userRepo.findByProfileAddress(profileAddress);
             userService.returnUserProfileData(userProfile, model);
-
-        } catch (NumberFormatException e) {
-            return "redirect:/home";
-        }
 
         return "userProfile";
     }
