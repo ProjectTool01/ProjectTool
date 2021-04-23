@@ -1,3 +1,6 @@
+<#include "parts/security.ftlh">
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -76,9 +79,11 @@
           <a href="/user/list">User list</a>
         </li>
       </#if>
-      <a href="/userlist">список пользователей</a>
-      <a href="/id${userId}">мой профиль</a>
       <a href="/projects">проекты</a>
+      <a href="/userlist">список пользователей</a>
+      <a href="/user/${userId}">мой профиль</a>
+			<a href="/myprofile">мой профиль</a>
+			<h1>Привет, <span>${name}</span></h1>
 		</div>
 	</div><!-- main -->
 	<script>

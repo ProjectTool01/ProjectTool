@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="login_title">Пожалуйста <span>зарегистрируйтесь!</span></div>
-			<form>
+			<form action="/registration" method="post">
 				<div class="input-wrap">
 					<input class="username" type="text" name="username" onkeyup="registerValidation()" placeholder="Имя пользователя"/>
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('username')"></i>
@@ -37,11 +37,11 @@
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('surname')"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="confirm-password" type="password" name="confirm-password" onkeyup="registerValidation()" placeholder="Пароль">
+					<input class="confirm-password" type="password" name="confirm-password" onkeyup="registerValidation()" placeholder="Пароль"/>
 					<i class="far fa-eye fa-eye-slash"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="password" type="password" name="password" onkeyup="registerValidation()" placeholder="Подтвердите пароль">
+					<input class="password" type="password" name="password" onkeyup="registerValidation()" placeholder="Подтвердите пароль"/>
 					<i class="far fa-eye fa-eye-slash"></i>
 				</div>
 				<input type="hidden" name="_csrf" value="${_csrf.token}"/>

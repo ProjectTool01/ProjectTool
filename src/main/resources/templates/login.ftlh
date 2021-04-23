@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="login_title">Добро пожаловать <span>обратно!</span></div>
-			<form>
+			<form action="/login" method="post">
 				<div class="input-wrap">
 					<input class="username" type="text" name="username" onkeyup="loginValidation()" placeholder="Имя пользователя">
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('username')"></i>
