@@ -74,15 +74,23 @@ public class UserController {
         return "userProfileChangeData";
     }
 
-    @GetMapping("/user/{profileAddress}")
-    public String getUserProfile(Model model, @PathVariable String profileAddress) {
-
-            if (userRepo.findByProfileAddress(profileAddress) == null) {
+    @GetMapping("/user/{id}")
+    public String getUserProfile(Model model,
+                                 @PathVariable String id,
+                                 @AuthenticationPrincipal User user
+    ) {
+        try {
+            long userId = Long.parseLong(id);
+            if (userRepo.findById(userId) == null) {
                 return "redirect:/home";
             }
 
-            User userProfile = userRepo.findByProfileAddress(profileAddress);
+            User userProfile = userRepo.findById(userId);
             userService.returnUserProfileData(userProfile, model);
+
+        } catch (NumberFormatException e) {
+            return "redirect:/home";
+        }
 
         return "userProfile";
     }

@@ -12,7 +12,7 @@
         <button type="submit">Найти по нику</button>
     </form>
     <#list users as user>
-            <b><a href="/user/${user.profileAddress}">${user.username}</a></b><br/>
+            <b><a href="/user/${user.id}">${user.username}</a></b><br/>
     </#list>
 </body>
 </html>

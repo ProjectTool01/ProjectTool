@@ -1,9 +1,9 @@
 create table project
 (
-    id               serial8      not null,
-    project_owner_id int8         not null,
-    project_text     varchar(255) not null,
-    deleted          boolean      not null,
+    id               serial8 not null,
+    project_owner_id int8    not null,
+    project_text     text    not null,
+    deleted          boolean not null,
     primary key (id),
     foreign key (project_owner_id) references usr
 );
@@ -13,7 +13,7 @@ create table task
     id            serial8      not null,
     task_owner_id int8         not null,
     project_id    int8         not null,
-    task_text     varchar(255) not null,
+    task_text     text         not null,
     status        varchar(255) not null,
     deleted       boolean      not null,
     primary key (id),

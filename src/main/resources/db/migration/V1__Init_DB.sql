@@ -1,8 +1,6 @@
-create sequence usr_sequence start 4 increment 1;
-
 create table usr
 (
-    id              int8         not null,
+    id              serial8      not null,
     activation_code varchar(255),
     active          boolean      not null,
     email           varchar(255),

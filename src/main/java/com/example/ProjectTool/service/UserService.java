@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setProfileAddress("id" + user.getId());
         user.setAvatar("defaultAvatar.jpg");
         user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));

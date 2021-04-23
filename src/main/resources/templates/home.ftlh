@@ -19,6 +19,6 @@ ${message}
     </#if>
 </form>
 <a href="/userlist">список пользователей</a>
-<a href="/user/${profileAddress}">мой профиль</a>
+<a href="/user/${userId}">мой профиль</a>
 </body>
 </html>
