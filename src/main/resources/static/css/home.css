@@ -382,6 +382,6 @@ input {
   color: #000;
 }
 
-.content p {
+.content p, .content h1, .content span, .content a{
 	color: #000;
 }

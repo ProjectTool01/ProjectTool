@@ -7,7 +7,7 @@ const inputs = document.querySelectorAll('input');
 var isActiveSubmit = false;
 
 function loginValidation() {
-    isActiveSubmit = password.value.length > 1 && username.value.length > 1;
+    isActiveSubmit = password.value.length >= 1 && username.value.length >= 1;
     if (isActiveSubmit) {
         submit.classList.remove('disable');
         submit.disabled = false;
