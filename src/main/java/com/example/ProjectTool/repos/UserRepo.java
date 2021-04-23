@@ -11,7 +11,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String Username);
     User findByActivationCode(String code);
     User findById(long id);
-    User findByProfileAddress(String profileAddress);
 
     @Query(value = "SELECT u FROM User u WHERE LOWER(u.username) LIKE %:user_name% ORDER BY u.username")
     List<User> findUsersByUsername(@Param("user_name") String username);

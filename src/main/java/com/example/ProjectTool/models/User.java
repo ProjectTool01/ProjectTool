@@ -16,7 +16,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String profileAddress;
     private String username;
     private String name;
     private String surname;
@@ -155,14 +154,6 @@ public class User implements UserDetails {
 
     public void setNewEmail(String newEmail) {
         this.newEmail = newEmail;
-    }
-
-    public String getProfileAddress() {
-        return profileAddress;
-    }
-
-    public void setProfileAddress(String profileAddress) {
-        this.profileAddress = profileAddress;
     }
 
     public Set<Project> getProjects() {

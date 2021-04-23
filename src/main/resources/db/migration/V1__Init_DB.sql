@@ -10,7 +10,6 @@ create table usr
     name            varchar(255) not null,
     surname         varchar(255) not null,
     avatar          varchar(255) not null,
-    profile_address varchar(255) not null unique,
     primary key (id)
 );
 
