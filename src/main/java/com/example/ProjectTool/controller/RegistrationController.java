@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class RegistrationController {
     @Autowired
     private UserService userService;

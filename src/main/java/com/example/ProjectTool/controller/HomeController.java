@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+
 @Controller
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class HomeController {
 
     @Autowired
