@@ -7,6 +7,7 @@ known = Session.SPRING_SECURITY_CONTEXT??
     name = user.getUsername()
     userId = user.getId()
     isAdmin = user.isAdmin()
+    avatar = user.getAvatar()
     >
 <#else>
     <#assign

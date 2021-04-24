@@ -58,7 +58,7 @@
 				<i class="icon-notifications icon-header"></i>
 
 				<div class="user__block">
-					<div class="user" id="user1"><img src="../static/img/slidan.jpg" alt=""></div>
+					<div class="user" id="user1"><img src="/img/${avatar}" alt=""></div>
 					<div class="user__dropdown-menu" id="dropdown">
 						<a class="dropdown-menu__item">Настройки</a>
 						<hr class="dropdown-menu__line">
