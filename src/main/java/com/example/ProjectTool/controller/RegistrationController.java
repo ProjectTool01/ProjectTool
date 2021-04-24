@@ -3,6 +3,7 @@ package com.example.ProjectTool.controller;
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,12 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(@AuthenticationPrincipal User user) {
+
+        if(user != null){
+            return "redirect:/home";
+        }
+
         return "registration";
     }
 
