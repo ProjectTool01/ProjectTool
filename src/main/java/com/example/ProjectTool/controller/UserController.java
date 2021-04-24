@@ -4,13 +4,16 @@ import com.example.ProjectTool.models.Role;
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.UserRepo;
 import com.example.ProjectTool.service.UserService;
+import com.example.ProjectTool.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -64,14 +67,20 @@ public class UserController {
     public String postChangeMyProfileData(@AuthenticationPrincipal User user,
                                           @RequestParam String password,
                                           @RequestParam String email,
+                                          @RequestParam("file") MultipartFile file,
                                           Model model
     ) {
-        userService.changeUserData(user, password, email);
+        userService.changeUserData(user, password, email, file);
         if (!password.isEmpty()) {
             model.addAttribute("changePasswordMessage", "Пароль успешно изменен!");
         }
         if (!email.isEmpty() && !email.equals(user.getEmail())) {
             model.addAttribute("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
+        }
+        if (!file.isEmpty() && StringHelper.isImage(file.getOriginalFilename())) {
+            model.addAttribute("changeAvatarMessage", "Аватар успешно изменен!");
+        } else if (!StringHelper.isImage(file.getOriginalFilename())) {
+            model.addAttribute("changeAvatarMessage", "Некорректный файл!");
         }
         return "userProfileChangeData";
     }

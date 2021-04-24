@@ -4,6 +4,7 @@ import com.example.ProjectTool.models.Role;
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,9 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.example.ProjectTool.util.StringHelper.isImage;
 
 @Service
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
@@ -26,6 +32,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -101,7 +110,7 @@ public class UserService implements UserDetailsService {
         model.addAttribute("name", nameAndSurname);
     }
 
-    public void changeUserData(User user, String password, String email) {
+    public void changeUserData(User user, String password, String email, MultipartFile file) {
         boolean isEmailChanged = (!email.isEmpty() && !email.equals(user.getEmail()));
         if (isEmailChanged) {
             user.setNewEmail(email);
@@ -112,6 +121,29 @@ public class UserService implements UserDetailsService {
 
         if (!StringUtils.isEmpty(password)) {
             user.setPassword(passwordEncoder.encode(password));
+        }
+
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String resultFileName = UUID.randomUUID().toString() + "." + file.getOriginalFilename();
+
+            try {
+                file.transferTo(new File(uploadPath + resultFileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (!user.getAvatar().equals("defaultAvatar.jpg")) {
+                File oldAvatar = new File(uploadPath + user.getAvatar());
+                oldAvatar.delete();
+            }
+            user.setAvatar(resultFileName);
         }
 
         userRepo.save(user);
