@@ -98,8 +98,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String getUserProfile(Model model,
-                                 @PathVariable String id,
-                                 @AuthenticationPrincipal User user
+                                 @PathVariable String id
     ) {
         try {
             if (userRepo.findById(StringHelper.extractId(id)) == null) {
