@@ -55,10 +55,10 @@ public class UserController {
         return "redirect:/user/list";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/userlist")
     public ModelAndView userMappingRedirect(@RequestParam(required = false, defaultValue = "") String username) {
 
-        ModelAndView modelAndView = new ModelAndView("user");
+        ModelAndView modelAndView = new ModelAndView("userlist");
         List<User> users = userRepo.findAll();
         if (!username.isEmpty()) {
             users = userRepo.findUsersByUsername(username.toLowerCase());
@@ -96,16 +96,17 @@ public class UserController {
         return "userProfileChangeData";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id{id}")
     public String getUserProfile(Model model,
                                  @PathVariable String id
     ) {
         try {
-            if (userRepo.findById(StringHelper.extractId(id)) == null) {
+            long userId = Long.parseLong(id);
+            if (userRepo.findById(userId) == null) {
                 return "redirect:/home";
             }
 
-            User userProfile = userRepo.findById(StringHelper.extractId(id));
+            User userProfile = userRepo.findById(userId);
             userService.returnUserProfileData(userProfile, model);
 
         } catch (NumberFormatException e) {
