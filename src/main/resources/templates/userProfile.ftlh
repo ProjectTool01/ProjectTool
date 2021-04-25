@@ -11,7 +11,7 @@ ${username!}<br/>
 ${name!}<br/>
 <img src="/img/${avatar}" alt="avatar"><br/>
 
-<a href="/user/change">Изменить</a>
+<a href="/settings">Изменить</a>
 <a href="/home">Домой</a>
 </body>
 </html>

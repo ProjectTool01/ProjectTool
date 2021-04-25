@@ -16,22 +16,22 @@ public class Project {
     @JoinColumn(name = "project_owner_id")
     private User projectOwner;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_project",
-            joinColumns = {@JoinColumn(name = "project_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
+    private String name;
+
+    @Column(name = "project_identifier")
+    private String projectIdentifier;
+
+    @ManyToMany(mappedBy = "projects")
     private Set<User> users = new HashSet<>();
 
     private String projectText;
     private boolean deleted;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,5 +65,21 @@ public class Project {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProjectIdentifier() {
+        return projectIdentifier;
+    }
+
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier;
     }
 }

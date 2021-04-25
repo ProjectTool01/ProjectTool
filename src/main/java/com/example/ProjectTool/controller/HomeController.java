@@ -2,6 +2,7 @@ package com.example.ProjectTool.controller;
 
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.UserRepo;
+import com.example.ProjectTool.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +16,8 @@ import java.util.List;
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class HomeController {
 
-    @Autowired
-    private UserRepo userRepo;
-
     @GetMapping("/")
-    public String greeting(Model model) {
+    public String greeting() {
         return "redirect:/home";
     }
 
@@ -29,20 +27,8 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/userlist")
-    public String getUserList(Model model, @RequestParam(required = false, defaultValue = "") String username) {
-        List<User> users = userRepo.findAll();
-        if (!username.isEmpty()) {
-            users = userRepo.findUsersByUsername(username.toLowerCase());
-        }
-
-        model.addAttribute("filter", username);
-        model.addAttribute("users", users);
-        return "allUsers";
-    }
-
     @GetMapping("/message")
-    public String getUserMessage(Model model){
+    public String getUserMessage(){
 
         return null;
     }

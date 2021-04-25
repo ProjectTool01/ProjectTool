@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 
@@ -54,16 +56,25 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String userMappingRedirect() {
-        return "redirect:/userlist";
+    public ModelAndView userMappingRedirect(@RequestParam(required = false, defaultValue = "") String username) {
+
+        ModelAndView modelAndView = new ModelAndView("user");
+        List<User> users = userRepo.findAll();
+        if (!username.isEmpty()) {
+            users = userRepo.findUsersByUsername(username.toLowerCase());
+        }
+
+        modelAndView.addObject("filter", username);
+        modelAndView.addObject("users", users);
+        return modelAndView;
     }
 
-    @GetMapping("/user/change")
+    @GetMapping("/settings")
     public String getChangeMyProfileData() {
         return "userProfileChangeData";
     }
 
-    @PostMapping("/user/change")
+    @PostMapping("/settings")
     public String postChangeMyProfileData(@AuthenticationPrincipal User user,
                                           @RequestParam String password,
                                           @RequestParam String email,
@@ -85,18 +96,17 @@ public class UserController {
         return "userProfileChangeData";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public String getUserProfile(Model model,
                                  @PathVariable String id,
                                  @AuthenticationPrincipal User user
     ) {
         try {
-            long userId = Long.parseLong(id);
-            if (userRepo.findById(userId) == null) {
+            if (userRepo.findById(StringHelper.extractId(id)) == null) {
                 return "redirect:/home";
             }
 
-            User userProfile = userRepo.findById(userId);
+            User userProfile = userRepo.findById(StringHelper.extractId(id));
             userService.returnUserProfileData(userProfile, model);
 
         } catch (NumberFormatException e) {

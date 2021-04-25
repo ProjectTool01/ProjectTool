@@ -163,4 +163,15 @@ public class User implements UserDetails {
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
+
+    public void addProjects(Project project) {
+        projects.add(project);
+        project.getUsers().add(this);
+    }
+
+    public void removeProject(Project project) {
+        projects.remove(project);
+        project.getUsers().remove(this);
+    }
+
 }

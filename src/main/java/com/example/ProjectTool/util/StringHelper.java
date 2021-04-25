@@ -22,4 +22,20 @@ public class StringHelper {
         }
         return false;
     }
+
+    public static long extractId(String userId) {
+
+        Pattern pattern = Pattern.compile(("^id\\d*"));
+        Matcher matcher = pattern.matcher(userId);
+        if (!matcher.matches()) {
+            return 0;
+        }
+
+        String result = null;
+        for(String res : userId.split("d")){
+            result = res;
+        }
+
+        return Long.parseLong(result);
+    }
 }

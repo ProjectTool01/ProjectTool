@@ -18,7 +18,7 @@ ${message}
         </li>
     </#if>
 </form>
-<a href="/userlist">список пользователей</a>
-<a href="/user/${userId}">мой профиль</a>
+<a href="/user">список пользователей</a>
+<a href="/id${userId}">мой профиль</a>
 </body>
 </html>
