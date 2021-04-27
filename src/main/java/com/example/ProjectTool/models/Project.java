@@ -1,9 +1,7 @@
 package com.example.ProjectTool.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "project")
@@ -11,7 +9,7 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @OneToOne
     @JoinColumn(name = "project_owner_id")
@@ -22,7 +20,9 @@ public class Project {
     @Column(name = "project_identifier")
     private String projectIdentifier;
 
-    @ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "projects",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     private String projectText;
@@ -102,5 +102,18 @@ public class Project {
                 ", name='" + name + '\'' +
                 ", users=" + users +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return id == project.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

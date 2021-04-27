@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProjectRepo extends JpaRepository<Project, Long> {
     Project findByProjectIdentifier(String projectIdentifier);
     Project findByProjectOwner(User user);
+    Project findById(long id);
 }

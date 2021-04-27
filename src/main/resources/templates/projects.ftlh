@@ -20,7 +20,7 @@ ${message!}
     <div><input type="submit" value="Вступить в проект"/></div>
 </form>
 <#list projects as project>
-    <td>proj.name = ${project.name}, proj.text = ${project.projectText}</td><br/>
+    <td><a href="/project${project.id}">proj.name = ${project.name}, proj.text = ${project.projectText}</a></td><br/>
 </#list>
 </body>
 </html>

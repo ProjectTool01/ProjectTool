@@ -11,10 +11,14 @@ public class Task {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "task_starter_id")
+    private User taskStarter;
+
+    @OneToOne
     @JoinColumn(name = "task_owner_id")
     private User taskOwner;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -68,5 +72,13 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getTaskStarter() {
+        return taskStarter;
+    }
+
+    public void setTaskStarter(User taskStarter) {
+        this.taskStarter = taskStarter;
     }
 }

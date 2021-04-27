@@ -4,9 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
@@ -26,7 +24,8 @@ public class User implements UserDetails {
     private String activationCode;
     private String avatar;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_project",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -182,4 +181,6 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

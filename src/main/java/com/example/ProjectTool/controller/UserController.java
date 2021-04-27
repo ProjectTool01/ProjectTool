@@ -69,11 +69,9 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView("userlist");
         List<User> users = userRepo.findAll();
-
         if (!username.isEmpty()) {
             users = userRepo.findUsersByUsername(username.toLowerCase());
         }
-
         modelAndView.addObject("filter", username);
         modelAndView.addObject("users", users);
 
@@ -93,15 +91,12 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView("userProfileChangeData");
         userService.changeUserData(user, password, email, file);
-
         if (!password.isEmpty()) {
             modelAndView.addObject("changePasswordMessage", "Пароль успешно изменен!");
         }
-
         if (!email.isEmpty() && !email.equals(user.getEmail())) {
             modelAndView.addObject("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
         }
-
         if (!file.isEmpty() && StringHelper.isImage(file.getOriginalFilename())) {
             modelAndView.addObject("changeAvatarMessage", "Аватар успешно изменен!");
         } else if (!StringHelper.isImage(file.getOriginalFilename())) {
