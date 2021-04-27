@@ -3,6 +3,7 @@ package com.example.ProjectTool.models;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "project")
@@ -21,11 +22,22 @@ public class Project {
     @Column(name = "project_identifier")
     private String projectIdentifier;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     private String projectText;
     private boolean deleted;
+
+    public Project() {
+    }
+
+    public Project(User projectOwner, String name, String projectText) {
+        this.projectOwner = projectOwner;
+        this.name = name;
+        this.projectText = projectText;
+        this.deleted = false;
+        this.projectIdentifier = UUID.randomUUID().toString().replace("-", "");
+    }
 
     public Long getId() {
         return id;
@@ -81,5 +93,14 @@ public class Project {
 
     public void setProjectIdentifier(String projectIdentifier) {
         this.projectIdentifier = projectIdentifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
     }
 }

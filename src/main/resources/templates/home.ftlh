@@ -20,5 +20,6 @@ ${message}
 </form>
 <a href="/userlist">список пользователей</a>
 <a href="/id${userId}">мой профиль</a>
+<a href="/projects">проекты</a>
 </body>
 </html>

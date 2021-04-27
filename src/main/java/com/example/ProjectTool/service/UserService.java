@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.ProjectTool.util.StringHelper.isImage;
-
 @Service
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class UserService implements UserDetailsService {
@@ -110,6 +108,7 @@ public class UserService implements UserDetailsService {
         model.addAttribute("name", nameAndSurname);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void changeUserData(User user, String password, String email, MultipartFile file) {
         boolean isEmailChanged = (!email.isEmpty() && !email.equals(user.getEmail()));
         if (isEmailChanged) {
@@ -123,7 +122,7 @@ public class UserService implements UserDetailsService {
             user.setPassword(passwordEncoder.encode(password));
         }
 
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
+        if (file != null && !Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
 
             File uploadDir = new File(uploadPath);
 
@@ -131,7 +130,7 @@ public class UserService implements UserDetailsService {
                 uploadDir.mkdir();
             }
 
-            String resultFileName = UUID.randomUUID().toString() + "." + file.getOriginalFilename();
+            String resultFileName = UUID.randomUUID() + "." + file.getOriginalFilename();
 
             try {
                 file.transferTo(new File(uploadPath + resultFileName));

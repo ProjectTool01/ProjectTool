@@ -10,11 +10,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +33,23 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/user/list")
-    public String userList(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "adminControlPanelUserList";
+    public ModelAndView userList() {
+
+        ModelAndView modelAndView = new ModelAndView("adminControlPanelUserList");
+        modelAndView.addObject("users", userService.findAll());
+
+        return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/user/list/{user}")
-    public String userEditorForm(@PathVariable User user, Model model) {
-        model.addAttribute("user", user);
-        model.addAttribute("roles", Role.values());
-        return "adminControlPanelUserEdit";
+    public ModelAndView userEditorForm(@PathVariable User user) {
+
+        ModelAndView modelAndView = new ModelAndView("adminControlPanelUserEdit");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("roles", Role.values());
+
+        return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -49,9 +57,10 @@ public class UserController {
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
-    ) {
+            @RequestParam("userId") User user) {
+
         userService.saveUser(user, username, form);
+
         return "redirect:/user/list";
     }
 
@@ -60,12 +69,14 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView("userlist");
         List<User> users = userRepo.findAll();
+
         if (!username.isEmpty()) {
             users = userRepo.findUsersByUsername(username.toLowerCase());
         }
 
         modelAndView.addObject("filter", username);
         modelAndView.addObject("users", users);
+
         return modelAndView;
     }
 
@@ -75,40 +86,42 @@ public class UserController {
     }
 
     @PostMapping("/settings")
-    public String postChangeMyProfileData(@AuthenticationPrincipal User user,
-                                          @RequestParam String password,
-                                          @RequestParam String email,
-                                          @RequestParam("file") MultipartFile file,
-                                          Model model
-    ) {
+    public ModelAndView postChangeMyProfileData(@AuthenticationPrincipal User user,
+                                                @RequestParam String password,
+                                                @RequestParam String email,
+                                                @RequestParam("file") MultipartFile file) {
+
+        ModelAndView modelAndView = new ModelAndView("userProfileChangeData");
         userService.changeUserData(user, password, email, file);
+
         if (!password.isEmpty()) {
-            model.addAttribute("changePasswordMessage", "Пароль успешно изменен!");
+            modelAndView.addObject("changePasswordMessage", "Пароль успешно изменен!");
         }
+
         if (!email.isEmpty() && !email.equals(user.getEmail())) {
-            model.addAttribute("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
+            modelAndView.addObject("changeEmailMessage", "Письмо с подтверждением отправлено на вашу почту!");
         }
+
         if (!file.isEmpty() && StringHelper.isImage(file.getOriginalFilename())) {
-            model.addAttribute("changeAvatarMessage", "Аватар успешно изменен!");
+            modelAndView.addObject("changeAvatarMessage", "Аватар успешно изменен!");
         } else if (!StringHelper.isImage(file.getOriginalFilename())) {
-            model.addAttribute("changeAvatarMessage", "Некорректный файл!");
+            modelAndView.addObject("changeAvatarMessage", "Некорректный файл!");
         }
-        return "userProfileChangeData";
+
+        return modelAndView;
     }
 
     @GetMapping("/id{id}")
-    public String getUserProfile(Model model,
-                                 @PathVariable String id
-    ) {
+    public String getUserProfile(Model model, @PathVariable String id) {
+
         try {
             long userId = Long.parseLong(id);
+
             if (userRepo.findById(userId) == null) {
                 return "redirect:/home";
             }
-
             User userProfile = userRepo.findById(userId);
             userService.returnUserProfileData(userProfile, model);
-
         } catch (NumberFormatException e) {
             return "redirect:/home";
         }

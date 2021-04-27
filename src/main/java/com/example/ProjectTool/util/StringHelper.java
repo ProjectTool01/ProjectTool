@@ -9,6 +9,7 @@ public class StringHelper {
         if (filename != null && !filename.isEmpty()) {
             String filenameExtension = "";
             int isExtensionExist = filename.lastIndexOf('.');
+
             if (isExtensionExist > 0) {
                 filenameExtension = filename.substring(isExtensionExist + 1);
             }
@@ -20,6 +21,7 @@ public class StringHelper {
 
             return matcher.matches();
         }
+
         return false;
     }
 

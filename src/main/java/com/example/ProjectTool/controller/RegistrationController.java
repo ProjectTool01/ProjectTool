@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
@@ -19,7 +20,7 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String registration(@AuthenticationPrincipal User user) {
 
-        if(user != null){
+        if (user != null) {
             return "redirect:/home";
         }
 
@@ -28,6 +29,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
+
         if (!userService.addUser(user)) {
             model.addAttribute("message", "User Exists!");
             return "registration";
@@ -36,13 +38,16 @@ public class RegistrationController {
     }
 
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code) {
+    public ModelAndView activate(@PathVariable String code) {
+
+        ModelAndView modelAndView = new ModelAndView("login");
         boolean isActivate = userService.activateUser(code);
         if (isActivate) {
-            model.addAttribute("message", "Учетная запись активирована!");
+            modelAndView.addObject("message", "Учетная запись активирована!");
         } else {
-            model.addAttribute("message", "Код активации не найден");
+            modelAndView.addObject("message", "Код активации не найден");
         }
-        return ("login");
+
+        return modelAndView;
     }
 }

@@ -3,27 +3,28 @@ package com.example.ProjectTool.controller;
 import com.example.ProjectTool.models.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AuthController {
 
     @GetMapping("/login")
-    public String getLogin(@RequestParam(name = "error", required = false) String error,
-                           @AuthenticationPrincipal User user,
-                           Model model) {
+    public ModelAndView getLogin(@RequestParam(name = "error", required = false) String error,
+                                 @AuthenticationPrincipal User user) {
 
-        if(user != null){
-            return "redirect:/home";
+        ModelAndView modelAndView = new ModelAndView("login");
+        if (user != null) {
+            modelAndView = new ModelAndView("redirect:/home");
+            return modelAndView;
         }
 
         if (error != null) {
-            model.addAttribute("message", "Неверный логин или пароль!");
-            return "login";
+            modelAndView.addObject("message", "Неверный логин или пароль!");
+            return modelAndView;
         }
 
-        return "login";
+        return modelAndView;
     }
 }

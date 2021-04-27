@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private String activationCode;
     private String avatar;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_project",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -174,4 +174,12 @@ public class User implements UserDetails {
         project.getUsers().remove(this);
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -1,12 +1,11 @@
 package com.example.ProjectTool.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class HomeController {
 
     @GetMapping("/")
@@ -15,9 +14,11 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("message", "Тут будет главная страница");
-        return "home";
-    }
+    public ModelAndView home() {
 
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("message", "Тут будет главная страница");
+
+        return modelAndView;
+    }
 }

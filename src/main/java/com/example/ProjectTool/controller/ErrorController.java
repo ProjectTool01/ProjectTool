@@ -3,7 +3,6 @@ package com.example.ProjectTool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +12,8 @@ public class ErrorController {
 
     @GetMapping("/error")
     public String handleError(HttpServletRequest request) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
 
@@ -29,7 +28,6 @@ public class ErrorController {
             } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
                 return "error/401";
             }
-
         }
         return "error/error";
     }
