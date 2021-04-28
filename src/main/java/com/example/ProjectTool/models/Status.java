@@ -6,6 +6,5 @@ public enum Status {
     NEW;
 
     private Status(){
-
     }
 }

@@ -129,10 +129,13 @@ public class ProjectController {
     public String postCreateTask(@AuthenticationPrincipal User user,
                                  @RequestParam String name,
                                  @RequestParam String text,
-                                 @RequestParam Project project) {
+                                 @RequestParam String id) {
 
+        long projectId = Long.parseLong(id);
+        Project project = projectRepo.findById(projectId);
+        projectService.createTask(project, user, name, text);
 
-        return null;
+        return "redirect:/project" + project.getId();
     }
 
     @PostMapping("/sendMessage")

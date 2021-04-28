@@ -22,9 +22,22 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    private String name;
     private String taskText;
-    private String status;
+    private Status status;
     private boolean deleted;
+
+    public Task() {
+    }
+
+    public Task(Project project, User taskStarter, String name, String taskText) {
+        this.taskStarter = taskStarter;
+        this.project = project;
+        this.name = name;
+        this.taskText = taskText;
+        this.status = Status.NEW;
+        this.deleted = false;
+    }
 
     public User getTaskOwner() {
         return taskOwner;
@@ -66,11 +79,11 @@ public class Task {
         return id;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -80,5 +93,13 @@ public class Task {
 
     public void setTaskStarter(User taskStarter) {
         this.taskStarter = taskStarter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

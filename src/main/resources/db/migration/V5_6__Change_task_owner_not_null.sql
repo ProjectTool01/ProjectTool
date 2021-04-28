@@ -1,0 +1,1 @@
+alter table task alter column task_owner_id drop not null;

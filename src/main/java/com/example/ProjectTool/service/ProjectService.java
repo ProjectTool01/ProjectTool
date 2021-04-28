@@ -2,23 +2,24 @@ package com.example.ProjectTool.service;
 
 import com.example.ProjectTool.models.Message;
 import com.example.ProjectTool.models.Project;
+import com.example.ProjectTool.models.Task;
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.MessageRepo;
 import com.example.ProjectTool.repos.ProjectRepo;
+import com.example.ProjectTool.repos.TaskRepo;
 import com.example.ProjectTool.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class ProjectService {
+
+    @Autowired
+    private TaskRepo taskRepo;
 
     @Autowired
     private MessageRepo messageRepo;
@@ -53,10 +54,17 @@ public class ProjectService {
 
     }
 
-    public void addMessage(Project project, User user, String text){
+    public void addMessage(Project project, User user, String text) {
 
         Message message = new Message(project, user, text);
         messageRepo.save(message);
+
+    }
+
+    public void createTask(Project project, User user, String name, String text) {
+
+        Task task = new Task(project, user, name, text);
+        taskRepo.save(task);
 
     }
 
