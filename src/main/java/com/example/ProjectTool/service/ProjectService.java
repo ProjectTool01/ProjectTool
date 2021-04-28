@@ -1,9 +1,6 @@
 package com.example.ProjectTool.service;
 
-import com.example.ProjectTool.models.Message;
-import com.example.ProjectTool.models.Project;
-import com.example.ProjectTool.models.Task;
-import com.example.ProjectTool.models.User;
+import com.example.ProjectTool.models.*;
 import com.example.ProjectTool.repos.MessageRepo;
 import com.example.ProjectTool.repos.ProjectRepo;
 import com.example.ProjectTool.repos.TaskRepo;
@@ -64,6 +61,21 @@ public class ProjectService {
     public void createTask(Project project, User user, String name, String text) {
 
         Task task = new Task(project, user, name, text);
+        taskRepo.save(task);
+
+    }
+
+    public void takeTask(Task task, User user){
+
+        task.setTaskOwner(user);
+        task.setStatus(Status.TAKEN);
+        taskRepo.save(task);
+
+    }
+
+    public void doneTask(Task task){
+
+        task.setStatus(Status.DONE);
         taskRepo.save(task);
 
     }

@@ -131,9 +131,31 @@ public class ProjectController {
                                  @RequestParam String text,
                                  @RequestParam String id) {
 
-        long projectId = Long.parseLong(id);
-        Project project = projectRepo.findById(projectId);
+        Project project = projectRepo.findById(Long.parseLong(id));
         projectService.createTask(project, user, name, text);
+
+        return "redirect:/project" + project.getId();
+    }
+
+    @PostMapping("/takeTask")
+    public String postTakeTask(@AuthenticationPrincipal User user,
+                                     @RequestParam String taskId,
+                                     @RequestParam String projectId){
+
+        Project project = projectRepo.findById(Long.parseLong(projectId));
+        Task task = taskRepo.findById(Long.parseLong(taskId));
+        projectService.takeTask(task, user);
+
+        return "redirect:/project" + project.getId();
+    }
+
+    @PostMapping("/doneTask")
+    public String postDoneTask(@RequestParam String taskId,
+                               @RequestParam String projectId){
+
+        Project project = projectRepo.findById(Long.parseLong(projectId));
+        Task task = taskRepo.findById(Long.parseLong(taskId));
+        projectService.doneTask(task);
 
         return "redirect:/project" + project.getId();
     }
@@ -151,5 +173,7 @@ public class ProjectController {
 
         return "redirect:/project" + project.getId();
     }
+
+
 
 }
