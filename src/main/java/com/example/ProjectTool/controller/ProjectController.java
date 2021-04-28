@@ -1,16 +1,20 @@
 package com.example.ProjectTool.controller;
 
+import com.example.ProjectTool.models.Message;
 import com.example.ProjectTool.models.Project;
 import com.example.ProjectTool.models.Task;
 import com.example.ProjectTool.models.User;
+import com.example.ProjectTool.repos.MessageRepo;
 import com.example.ProjectTool.repos.ProjectRepo;
 import com.example.ProjectTool.repos.TaskRepo;
-import com.example.ProjectTool.repos.UserRepo;
 import com.example.ProjectTool.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,6 +23,9 @@ import java.util.Set;
 @Controller
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class ProjectController {
+
+    @Autowired
+    private MessageRepo messageRepo;
 
     @Autowired
     private ProjectRepo projectRepo;
@@ -72,8 +79,10 @@ public class ProjectController {
                 return modelAndView;
             }
             List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));
+            List<Message> messages = messageRepo.findMessagesByProjectId(projectId);
             modelAndView.setViewName("projectPage");
             modelAndView.addObject("tasks", tasks);
+            modelAndView.addObject("messages", messages);
             modelAndView.addObject("project", projectRepo.findById(projectId));
 
         } catch (NumberFormatException e) {
@@ -117,9 +126,27 @@ public class ProjectController {
     }
 
     @PostMapping("/createTask")
-    public String postCreateTask(){
+    public String postCreateTask(@AuthenticationPrincipal User user,
+                                 @RequestParam String name,
+                                 @RequestParam String text,
+                                 @RequestParam Project project) {
+
 
         return null;
+    }
+
+    @PostMapping("/sendMessage")
+    public String postSendMessage(@AuthenticationPrincipal User user,
+                                  @RequestParam String text,
+                                  @RequestParam String id){
+
+        long projectId = Long.parseLong(id);
+        Project project = projectRepo.findById(projectId);
+        if(!text.isEmpty() && project != null){
+            projectService.addMessage(project, user, text);
+        }
+
+        return "redirect:/project" + project.getId();
     }
 
 }

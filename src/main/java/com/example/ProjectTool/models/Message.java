@@ -19,11 +19,21 @@ public class Message {
     private User fromUser;
 
     @ManyToOne
-    @JoinColumn(name = "to_user")
-    private User toUser;
+    @JoinColumn(name = "to_project")
+    private Project toProject;
 
     @Column(name = "message_time")
     private Timestamp messageTime;
+
+    public Message() {
+    }
+
+    public Message(Project toProject, User fromUser, String text) {
+        this.text = text;
+        this.fromUser = fromUser;
+        this.toProject = toProject;
+        this.messageTime = new Timestamp(System.currentTimeMillis());
+    }
 
     public Long getId() {
         return id;
@@ -49,12 +59,12 @@ public class Message {
         this.fromUser = fromUser;
     }
 
-    public User getToUser() {
-        return toUser;
+    public Project getToProject() {
+        return toProject;
     }
 
-    public void setToUser(User toUser) {
-        this.toUser = toUser;
+    public void setToProject(Project toProject) {
+        this.toProject = toProject;
     }
 
     public Timestamp getMessageTime() {

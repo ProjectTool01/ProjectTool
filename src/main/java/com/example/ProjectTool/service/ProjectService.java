@@ -1,7 +1,9 @@
 package com.example.ProjectTool.service;
 
+import com.example.ProjectTool.models.Message;
 import com.example.ProjectTool.models.Project;
 import com.example.ProjectTool.models.User;
+import com.example.ProjectTool.repos.MessageRepo;
 import com.example.ProjectTool.repos.ProjectRepo;
 import com.example.ProjectTool.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,8 @@ import java.util.Set;
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class ProjectService {
 
-    @PersistenceContext
-    EntityManager entityManager;
+    @Autowired
+    private MessageRepo messageRepo;
 
     @Autowired
     private ProjectRepo projectRepo;
@@ -48,6 +50,13 @@ public class ProjectService {
         userRepo.save(user);
         user.setProjects(projects);
         userRepo.save(user);
+
+    }
+
+    public void addMessage(Project project, User user, String text){
+
+        Message message = new Message(project, user, text);
+        messageRepo.save(message);
 
     }
 
