@@ -1,10 +1,9 @@
 const username = document.querySelector('.username');
 const password = document.querySelector('.password');
+const close = document.querySelector('.fa-times');
 const submit = document.querySelector('.enter');
 const visibiliryBtn = document.querySelectorAll('.fa-eye');
-const clearBtn = document.querySelectorAll('.fa-times');
-const inputs = document.querySelectorAll('input');
-var isActiveSubmit = false;
+let isActiveSubmit = false;
 
 function loginValidation() {
     isActiveSubmit = password.value.length >= 1 && username.value.length >= 1;
@@ -30,4 +29,15 @@ function clearInput(input) {
     document.querySelector('.' + input).value = '';
 }
 
-window.onload = loginValidation(), registerValidation();
+username.addEventListener('input', () => {
+    loginValidation();
+});
+
+password.addEventListener('input', () => {
+    loginValidation();
+})
+
+close.addEventListener('click', () => {
+    clearInput('username');
+    loginValidation();
+});

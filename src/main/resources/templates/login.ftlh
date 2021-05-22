@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/authorization.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-	<title>WorkPix</title>
+	<title>ProjectTool</title>
 </head>
 <body>
 	<div class="background">
@@ -21,11 +21,11 @@
 			<div class="login_title">Добро пожаловать <span>обратно!</span></div>
 			<form action="/login" method="post">
 				<div class="input-wrap">
-					<input class="username" type="text" name="username" onkeyup="loginValidation()" placeholder="Имя пользователя">
-					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('username')"></i>
+					<input class="username" type="text" name="username" placeholder="Имя пользователя">
+					<i class="fa fa-times" aria-hidden="true"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="password" type="password" name="password" onkeyup="loginValidation()" placeholder="Пароль">
+					<input class="password" type="password" name="password" placeholder="Пароль">
 					<i class="far fa-eye fa-eye-slash"></i>
 				</div>
 				<input type="hidden" name="_csrf" value="${_csrf.token}"/>

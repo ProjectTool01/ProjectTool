@@ -76,7 +76,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
-	color: #fff;
+	color: #000;
 }
 
 body, html {
@@ -85,6 +85,20 @@ body, html {
 
 body {
 	display: flex;
+}
+
+h1 {
+	font-size: 40px;
+}
+
+span {
+	color: #5584ff;
+}
+
+input {
+	border: none;
+	background: transparent;
+	cursor: pointer;
 }
 
 /*side_menu=====================================================*/
@@ -113,11 +127,8 @@ body {
 .main-title {
 	font-weight: 700;
 	font-size: 30px;
+	color: #fff;
 }
-
-.main-title span {
-	color: #5584ff;
-}	
 
 .side_menu__buttons {
 	display: flex;
@@ -165,6 +176,7 @@ body {
 	width: 100%;
 }
 
+/*header========================================================*/
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -202,7 +214,7 @@ body {
 	display: none;
 }
 
-.div {
+.burger-wrap {
 	display: flex;
 	align-items: center;
 	font-size: 40px;
@@ -243,19 +255,19 @@ body {
 	display: flex;
 	align-items: center;
 	color: #fff;
-	width: 230px;
 	height: 40px;
-	background: #5584ff;
+	background: #0e1a35;
 	border-radius: 20px;
 	font-weight: 700;
 	padding: 20px 18px;
 	margin-right: 50px;
 	transition: 0.2s;
 	transition-property: background;
+	cursor: pointer;
 }
 
 .add_project:hover {
-	background: #608cfd;
+	background: #5584ff;
 }
 
 .icon-mail-envelope-closed {
@@ -320,23 +332,11 @@ body {
 	align-items: center;
 	height: 35px;
 	width: 100%;
-}
-
-input {
-	border: none;
-	background: transparent;
-	cursor: pointer;
+	color: #fff;
 }
 
 .dropdown-menu__item:hover {
 	background: #1b3165; 
-}
-
-.user__dropdown-menu a {
-	color: #fff;
-	text-decoration: none;
-	display: flex;
-	align-items: center;
 }
 
 .dropdown-menu__item:first-child {
@@ -379,9 +379,5 @@ input {
 	width: 100%;
 	height: 89%;
 	background: #f6f7fa;
-  color: #000;
-}
-
-.content p, .content h1, .content span, .content a{
-	color: #000;
+	padding: 30px 80px;
 }
