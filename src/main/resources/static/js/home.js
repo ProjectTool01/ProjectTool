@@ -1,6 +1,9 @@
 const burger = document.querySelector('.burger-wrap');
 const container = document.querySelector('.content');
 const user = document.querySelector('.user');
+const invitations = document.querySelectorAll('.invitations .card-item');
+const tasks = document.querySelectorAll('.tasks .card-item');
+const projects = document.querySelectorAll('.select-project .card-item');
 let isNavMenuOpened = true;
 let isDropDownMenuOpened = false;
 
@@ -27,3 +30,6 @@ container.addEventListener('click', () => {
 });
 burger.addEventListener('click', () => openMenu('burger'));
 user.addEventListener("click", () => openDropDownMenu('user'));
+document.querySelector('.invitations span').innerHTML = invitations.length;
+document.querySelector('.tasks span').innerHTML = tasks.length;
+document.querySelector('.select-project span').innerHTML = projects.length;

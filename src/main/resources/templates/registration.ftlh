@@ -21,27 +21,27 @@
 			<div class="login_title">Пожалуйста <span>зарегистрируйтесь!</span></div>
 			<form action="/registration" method="post">
 				<div class="input-wrap">
-					<input class="username" type="text" name="username" onkeyup="registerValidation()" placeholder="Имя пользователя"/>
+					<input class="username" type="text" name="username" placeholder="Имя пользователя"/>
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('username')"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="email" type="email" name="email" onkeyup="registerValidation()" placeholder="Email"/>
+					<input class="email" type="email" name="email" placeholder="Email"/>
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('email')"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="name" type="text" name="name" onkeyup="registerValidation()" placeholder="Имя"/>
+					<input class="name" type="text" name="name" placeholder="Имя"/>
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('name')"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="surname" type="text" name="surname" onkeyup="registerValidation()" placeholder="Фамилия"/>
+					<input class="surname" type="text" name="surname" placeholder="Фамилия"/>
 					<i class="fa fa-times" aria-hidden="true" onclick="clearInput('surname')"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="confirm-password" type="password" name="confirm-password" onkeyup="registerValidation()" placeholder="Пароль"/>
+					<input class="confirm-password" type="password" name="confirm-password" placeholder="Пароль"/>
 					<i class="far fa-eye fa-eye-slash"></i>
 				</div>
 				<div class="input-wrap">
-					<input class="password" type="password" name="password" onkeyup="registerValidation()" placeholder="Подтвердите пароль"/>
+					<input class="password" type="password" name="password" placeholder="Подтвердите пароль"/>
 					<i class="far fa-eye fa-eye-slash"></i>
 				</div>
 				<input type="hidden" name="_csrf" value="${_csrf.token}"/>

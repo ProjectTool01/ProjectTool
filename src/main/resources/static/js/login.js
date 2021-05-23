@@ -29,13 +29,11 @@ function clearInput(input) {
     document.querySelector('.' + input).value = '';
 }
 
-username.addEventListener('input', () => {
-    loginValidation();
+[ username, password ].forEach(function(element) {
+    element.addEventListener("input", function() {
+        loginValidation();
+    });
 });
-
-password.addEventListener('input', () => {
-    loginValidation();
-})
 
 close.addEventListener('click', () => {
     clearInput('username');

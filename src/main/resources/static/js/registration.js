@@ -5,10 +5,9 @@ const surname = document.querySelector('.surname');
 const confirmPassword = document.querySelector('.confirm-password');
 const password = document.querySelector('.password');
 const submit = document.querySelector('.enter');
-const visibiliryBtn = document.querySelectorAll('.fa-eye');
+const visibilityBtn = document.querySelectorAll('.fa-eye');
 const clearBtn = document.querySelectorAll('.fa-times');
-const inputs = document.querySelectorAll('input');
-var isActiveSubmit = false;
+let isActiveSubmit = false;
 
 function registerValidation() {
     if (
@@ -18,7 +17,7 @@ function registerValidation() {
         surname.value.length > 1 &&
         confirmPassword.value.length > 1 &&
         password.value.length > 1 &&
-        password.value == confirmPassword.value
+        password.value === confirmPassword.value
     ) {isActiveSubmit = true}
     else {isActiveSubmit = false}
     
@@ -31,20 +30,31 @@ function registerValidation() {
     }
 }
 
-visibiliryBtn[0].addEventListener('click', 
+visibilityBtn[0].addEventListener('click',
     () => toggleVisibility(confirmPassword, 0));
 
-visibiliryBtn[1].addEventListener('click', 
+visibilityBtn[1].addEventListener('click',
     () => toggleVisibility(password, 1));
 
 function toggleVisibility(input, number) {
     const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
     input.setAttribute('type', type);
-    visibiliryBtn[number].classList.toggle('fa-eye-slash');
+    visibilityBtn[number].classList.toggle('fa-eye-slash');
 }
 
 function clearInput(input) {
     document.querySelector('.' + input).value = '';
 }
 
-window.onload = registerValidation();
+[ username, email, firstName, surname, confirmPassword, password ].forEach(function(element) {
+    element.addEventListener("input", function() {
+        registerValidation();
+        console.log('input triggered');
+    });
+});
+
+clearBtn.forEach(function(element) {
+    element.addEventListener("click", function() {
+        registerValidation();
+    });
+});
