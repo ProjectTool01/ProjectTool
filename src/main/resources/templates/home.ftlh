@@ -78,8 +78,8 @@
 						<div>
 							<div class="project-info__title">Project Name</div>
 							<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
-							<div class="project-info__text">Members: <span>9</span></div>
-							<div class="project-info__text">Tasks: <span>100</span></div>
+							<div class="project-info__members">Members: <span>9</span></div>
+							<div class="project-info__tasks">Tasks: <span>100</span></div>
 						</div>
 						<button class="button decline">Close Project</button>
 					</div>
@@ -125,10 +125,6 @@
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
 						<div class="card-content">
-							<div class="card-item">
-								<div class="task-status">N</div>
-								<div class="task-text">Slkjdf jsdkjfsj lsdjl jsdljfssdljfl jsdj jdjfdj.</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -137,20 +133,7 @@
 				<div class="select-project card">
 					<div class="card-title">Projects <span></span></div>
 					<div class="card-content">
-						<div class="card-item">
-							<div class="person-img"><img src="/img/${avatar}" alt=""></div>
-							<div class="select-project__info">
-								<div class="project-name">Super Puper Project Name</div>
-								<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
-							</div>
-						</div>
-						<div class="card-item">
-							<div class="person-img"><img src="/img/${avatar}" alt=""></div>
-							<div class="select-project__info">
-								<div class="project-name">Super Puper Project Name</div>
-								<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -177,6 +160,5 @@
 	<script src="../static/js/main.js"></script>
 	<script src="../static/js/home.js"></script>
 	<script src="../static/js/add-project.js"></script>
-	<script src="../static/js/pie-chart.js"></script>
 </body>
 </html>

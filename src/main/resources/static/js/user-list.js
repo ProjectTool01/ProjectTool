@@ -3,7 +3,6 @@ const inputName = document.querySelector('.input');
 const users = document.querySelectorAll('.users .card-item');
 const usersNumber = document.querySelector('.users .card-title span');
 let xhr = new XMLHttpRequest();
-// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
 
 searchButton.addEventListener('click', getRequest)
 
