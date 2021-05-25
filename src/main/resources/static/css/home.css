@@ -145,3 +145,9 @@ canvas {
 .project-name {
 	font-weight: bold;
 }
+
+@media (max-width: 768px) {
+	.content-left__bottom {
+
+	}
+}

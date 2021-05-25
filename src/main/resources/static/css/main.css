@@ -98,8 +98,8 @@ input {
 .header {
     display: flex;
     justify-content: space-between;
-    height: 70px;
     background: #fff;
+    padding: 5px 0;
 }
 
 .header_left {
@@ -273,7 +273,9 @@ input {
 /*main==========================================================*/
 .main {
     width: 83.44%;
+    height: 100%;
     transition: all 300ms;
+    background: #f6f7fa;
 }
 
 #main.active {
@@ -283,10 +285,9 @@ input {
 /*content=======================================================*/
 .content {
     width: 100%;
-    height: 89%;
-    background: #f6f7fa;
-    padding: 30px 80px;
+    padding: 20px 80px;
     display: flex;
+
 }
 
 /*card=========================================================*/
@@ -296,7 +297,6 @@ input {
     justify-content: start;
     border: 1px solid #000;
     border-radius: 15px;
-    height: 100%;
     overflow: hidden;
 }
 
