@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -18,7 +19,7 @@
 			<div class="main-title">Project<span>Tool</span></div>
 		</div>
 		<nav class="side-menu__buttons">
-			<a href="" class="side-menu__link">
+			<a href="/home" class="side-menu__link">
 				<i class="fa fa-home" aria-hidden="true"></i>
 				Главная
 			</a>
@@ -72,7 +73,7 @@
 		<div class="content">
 			<div class="content-left">
 				<h1>Hello <span>${name}!</span></h1>
-				<div class="project-info card">
+				<div class="project-info">
 					<div class="project-info__left">
 						<div>
 							<div class="project-info__title">Project Name</div>
@@ -90,40 +91,44 @@
 				<div class="content-left__bottom">
 					<div class="invitations card">
 						<div class="card-title">Invitations <span></span></div>
-						<div class="card-item">
-							<div class="card-text">Super Puper Project Name</div>
-							<div class="invitations-buttons">
-								<button class="button accept">Accept</button>
-								<button class="button decline">Decline</button>
+						<div class="card-content">
+							<div class="card-item">
+								<div class="card-text">Super Puper Project Name</div>
+								<div class="invitations-buttons">
+									<button class="button accept">Accept</button>
+									<button class="button decline">Decline</button>
+								</div>
 							</div>
-						</div>
-						<div class="card-item">
-							<div class="card-text">Project Name</div>
-							<div class="invitations-buttons">
-								<button class="button accept">Accept</button>
-								<button class="button decline">Decline</button>
+							<div class="card-item">
+								<div class="card-text">Project Name</div>
+								<div class="invitations-buttons">
+									<button class="button accept">Accept</button>
+									<button class="button decline">Decline</button>
+								</div>
 							</div>
-						</div>
-						<div class="card-item">
-							<div class="card-text">Super Puper Project Name</div>
-							<div class="invitations-buttons">
-								<button class="button accept">Accept</button>
-								<button class="button decline">Decline</button>
+							<div class="card-item">
+								<div class="card-text">Super Puper Project Name</div>
+								<div class="invitations-buttons">
+									<button class="button accept">Accept</button>
+									<button class="button decline">Decline</button>
+								</div>
 							</div>
-						</div>
-						<div class="card-item">
-							<div class="card-text">Project Name</div>
-							<div class="invitations-buttons">
-								<button class="button accept">Accept</button>
-								<button class="button decline">Decline</button>
+							<div class="card-item">
+								<div class="card-text">Project Name</div>
+								<div class="invitations-buttons">
+									<button class="button accept">Accept</button>
+									<button class="button decline">Decline</button>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
-						<div class="card-item">
-							<div class="task-status">N</div>
-							<div class="task-text">Slkjdf jsdkjfsj lsdjl jsdljfssdljfl jsdj jdjfdj.</div>
+						<div class="card-content">
+							<div class="card-item">
+								<div class="task-status">N</div>
+								<div class="task-text">Slkjdf jsdkjfsj lsdjl jsdljfssdljfl jsdj jdjfdj.</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -131,18 +136,20 @@
 			<div class="content-right">
 				<div class="select-project card">
 					<div class="card-title">Projects <span></span></div>
-					<div class="card-item">
-						<div class="person-img"><img src="/img/${avatar}" alt=""></div>
-						<div class="select-project__info">
-							<div class="project-name">Super Puper Project Name</div>
-							<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
+					<div class="card-content">
+						<div class="card-item">
+							<div class="person-img"><img src="/img/${avatar}" alt=""></div>
+							<div class="select-project__info">
+								<div class="project-name">Super Puper Project Name</div>
+								<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
+							</div>
 						</div>
-					</div>
-					<div class="card-item">
-						<div class="person-img"><img src="/img/${avatar}" alt=""></div>
-						<div class="select-project__info">
-							<div class="project-name">Super Puper Project Name</div>
-							<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
+						<div class="card-item">
+							<div class="person-img"><img src="/img/${avatar}" alt=""></div>
+							<div class="select-project__info">
+								<div class="project-name">Super Puper Project Name</div>
+								<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -167,6 +174,7 @@
 		</div>
 		<!--------------------------- modal --------------------------->
 	</div>
+	<script src="../static/js/main.js"></script>
 	<script src="../static/js/home.js"></script>
 	<script src="../static/js/add-project.js"></script>
 	<script src="../static/js/pie-chart.js"></script>

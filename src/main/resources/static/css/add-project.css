@@ -56,7 +56,7 @@
     margin-bottom: 30px;
 }
 
-.input-wrap {
+.modal-window .input-wrap {
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #d4d9e3;
