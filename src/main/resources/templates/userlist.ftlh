@@ -119,7 +119,7 @@
             <div class="modal-user__wrap">
                 <button class="close-modal" data-close="true">&times;</button>
                 <h2 class="modal-title">Изменение профиля</h2>
-                <form class="modal-form" enctype="multipart/form-data" method="post">
+                <form class="modal-form" enctype="multipart/form-data" action="/settings" method="post">
                     <div class="input-wrap">
                         <input class="input input-email" type="text" name="email" placeholder="Изменить маил">
                         <i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-email')"></i>
