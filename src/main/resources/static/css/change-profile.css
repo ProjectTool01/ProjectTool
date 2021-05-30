@@ -1,0 +1,45 @@
+.modal-user {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .2s ease-out, background-color 5s ease-in-out;
+}
+
+.modal-user.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.modal-user__wrap {
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 50px 110px;
+    transform: translateY(15px);
+    transition: transform 0.5s ease-out;
+}
+
+.modal-user__wrap.active {
+    transform: translateY(0px);
+}
+
+/*form==============================================================*/
+.modal-user .input-wrap {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d4d9e3;
+    max-width: 250px;
+    margin-bottom: 15px;
+}
+
+.change-avatar {
+    margin-bottom: 20px;
+}

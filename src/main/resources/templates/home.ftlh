@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<title>ProjectTool</title>
 </head>
@@ -54,7 +55,7 @@
 				<div class="user__block">
 					<div class="user"><img src="/img/${avatar}" alt=""></div>
 					<div class="user__dropdown-menu" id="dropdown">
-						<a class="dropdown-menu__item" href="/id${userId}">Мой профиль</a>
+						<a class="dropdown-menu__item settings">Настройки</a>
 						<hr class="dropdown-menu__line">
 						<a class="dropdown-menu__item">Помощь</a>
 						<hr class="dropdown-menu__line">
@@ -76,8 +77,10 @@
 				<div class="project-info">
 					<div class="project-info__left">
 						<div>
-							<div class="project-info__title">Project Name</div>
-							<div class="project-description">This is super Puper Ultra duper project description, so this is all that i can sad about this.</div>
+							<div class="project-info__title">Название проекта</div>
+							<div class="project-description">Описание проекта</div>
+							<div class="project-owner">Владелец проекта:<span>TETSUKER</span></div>
+							<div class="project-identificator">Идентификатор проекта:<span>1235</span></div>
 							<div class="project-info__members">Members: <span>9</span></div>
 							<div class="project-info__tasks">Tasks: <span>100</span></div>
 						</div>
@@ -92,39 +95,32 @@
 					<div class="invitations card">
 						<div class="card-title">Invitations <span></span></div>
 						<div class="card-content">
-							<div class="card-item">
-								<div class="card-text">Super Puper Project Name</div>
-								<div class="invitations-buttons">
-									<button class="button accept">Accept</button>
-									<button class="button decline">Decline</button>
+							<#--<#list>-->
+								<div class="card-item">
+									<div class="card-text">Super Puper Project Name</div>
+									<div class="invitations-buttons">
+										<form class="modal-form" action="/accept" method="post">
+											<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+											<input class="button accept" type="submit" value="Accept"/>
+										</form>
+										<form class="modal-form" action="/decline" method="post">
+											<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+											<input class="button decline" type="submit" value="Decline"/>
+										</form>
+									</div>
 								</div>
-							</div>
-							<div class="card-item">
-								<div class="card-text">Project Name</div>
-								<div class="invitations-buttons">
-									<button class="button accept">Accept</button>
-									<button class="button decline">Decline</button>
-								</div>
-							</div>
-							<div class="card-item">
-								<div class="card-text">Super Puper Project Name</div>
-								<div class="invitations-buttons">
-									<button class="button accept">Accept</button>
-									<button class="button decline">Decline</button>
-								</div>
-							</div>
-							<div class="card-item">
-								<div class="card-text">Project Name</div>
-								<div class="invitations-buttons">
-									<button class="button accept">Accept</button>
-									<button class="button decline">Decline</button>
-								</div>
-							</div>
+							<#--</#list>-->
 						</div>
 					</div>
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
 						<div class="card-content">
+							<#--<#list>-->
+								<div class="card-item">
+									<div class="task-status">N</div>
+									<div class="task-text">Make huyna</div>
+								</div>
+							<#--</#list>-->
 						</div>
 					</div>
 				</div>
@@ -133,7 +129,17 @@
 				<div class="select-project card">
 					<div class="card-title">Projects <span></span></div>
 					<div class="card-content">
-
+						<#--<#list>-->
+							<a href="/home">
+								<div class="card-item">
+									<div class="person-img"><img src="/img/${avatar}"></div>
+									<div class="select-project__info">
+										<div class="project-name">Project Name</div>
+										<div class="project-description">Project super puper description</div>
+									</div>
+								</div>
+							</a>
+						<#--</#list>-->
 					</div>
 				</div>
 			</div>
@@ -145,20 +151,53 @@
 			<div class="modal-window__wrap">
 				<button class="close-modal" data-close="true">&times;</button>
 				<h2 class="modal-title">Создание проекта</h2>
-				<form class="modal-form" action="" method="post">
+				<form class="modal-form" action="/createProject" method="post">
 					<div class="input-wrap">
-						<input class="input" type="text" name="projectName" placeholder="Введите название">
-						<i class="fa fa-times" aria-hidden="true"></i>
+						<input class="input input-name" type="text" name="name" placeholder="Название проекта">
+						<i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-name')"></i>
+					</div>
+					<div class="input-wrap">
+						<input class="input input-description" name="text" placeholder="Описание проекта">
+						<i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-description')"></i>
 					</div>
 					<input type="hidden" name="_csrf" value="${_csrf.token}"/>
-					<input class="submit disable" type="submit" value="Добавить проект"/>
+					<input class="submit disable project-submit" type="submit" value="Добавить проект"/>
 				</form>
 			</div>
 		</div>
 		<!--------------------------- modal --------------------------->
+
+		<!--------------------------- user --------------------------->
+		<div class="modal-user" data-close="true">
+			<div class="modal-user__wrap">
+				<button class="close-modal" data-close="true">&times;</button>
+				<h2 class="modal-title">Изменение профиля</h2>
+				<form class="modal-form" action="multipart/form-data" method="post">
+					<div class="input-wrap">
+						<input class="input input-email" type="text" name="email" placeholder="Изменить маил">
+						<i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-email')"></i>
+					</div>
+					<div class="input-wrap">
+						<input class="input input-password" name="password" placeholder="Изменить пароль">
+						<i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-password')"></i>
+					</div>
+					<div class="change-avatar">
+						<p>Изменить аватар:</p>
+						<input type="file" name="file">
+					</div>
+					<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+					<input class="submit disable" type="submit" value="Сохранить"/>
+				</form>
+				${changePasswordMessage!}
+				${changeEmailMessage!}
+				${changeAvatarMessage!}
+			</div>
+		</div>
+		<!--------------------------- user --------------------------->
 	</div>
 	<script src="../static/js/main.js"></script>
 	<script src="../static/js/home.js"></script>
 	<script src="../static/js/add-project.js"></script>
+	<script src="../static/js/change-profile.js"></script>
 </body>
 </html>
