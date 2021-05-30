@@ -1,12 +1,13 @@
-const body = document.body;
 const button = document.querySelector('.add_project');
 const addProject = document.querySelector('.modal-window');
 const windowWrap = document.querySelector('.modal-window__wrap');
-const input = document.querySelector('.modal-window .input');
-const submit = document.querySelector('.modal-window .submit');
-const close = document.querySelector('.fa-times');
+const name = document.querySelector('.modal-window .input-name');
+const text = document.querySelector('.modal-window .input-description');
+const projectSubmit = document.querySelector('.modal-window .submit');
+const close = document.querySelectorAll('.fa-times');
 let isModalOpened = false;
-let isActiveSubmit = false;
+let isActiveProject = false;
+projectSubmit.disabled = true;
 
 button.addEventListener('click', () => {
     addProject.classList.add('active');
@@ -27,21 +28,24 @@ function clearInput(input) {
 }
 
 function validateForm() {
-    isActiveSubmit = input.value.length > 5;
-    if (isActiveSubmit) {
-        submit.classList.remove('disable');
-        submit.disabled = false;
+    isActiveProject = name.value.length > 4 && text.value.length > 6;
+    if (isActiveProject) {
+        projectSubmit.classList.remove('disable');
+        projectSubmit.disabled = false;
     } else {
-        submit.classList.add('disable');
-        submit.disabled = true;
+        projectSubmit.classList.add('disable');
+        projectSubmit.disabled = true;
     }
 }
 
-input.addEventListener('input', () => {
-    validateForm();
+[name, text].forEach(function(element) {
+    element.addEventListener("input", function() {
+        validateForm();
+    });
 });
 
-close.addEventListener('click', () => {
-    clearInput('input');
-    validateForm();
+close.forEach(function(element) {
+    element.addEventListener("click", function() {
+        validateForm();
+    });
 });

@@ -152,6 +152,7 @@ input {
 
 .header_right a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .add_project {

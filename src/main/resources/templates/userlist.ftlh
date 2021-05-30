@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../static/css/user-list.css">
     <link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>ProjectTool</title>
 </head>
@@ -54,7 +55,7 @@
                 <div class="user__block">
                     <div class="user"><img src="/img/${avatar}" alt=""></div>
                     <div class="user__dropdown-menu" id="dropdown">
-                        <a class="dropdown-menu__item" href="/id${userId}">Мой профиль</a>
+                        <a class="dropdown-menu__item settings">Настройки</a>
                         <hr class="dropdown-menu__line">
                         <a class="dropdown-menu__item">Помощь</a>
                         <hr class="dropdown-menu__line">
@@ -97,20 +98,53 @@
             <div class="modal-window__wrap">
                 <button class="close-modal" data-close="true">&times;</button>
                 <h2 class="modal-title">Создание проекта</h2>
-                <form class="modal-form" action="" method="post">
+                <form class="modal-form" action="/createProject" method="post">
                     <div class="input-wrap">
-                        <input class="input" type="text" name="projectName" placeholder="Введите название">
-                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <input class="input input-name" type="text" name="name" placeholder="Название проекта">
+                        <i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-name')"></i>
+                    </div>
+                    <div class="input-wrap">
+                        <input class="input input-description" name="text" placeholder="Описание проекта">
+                        <i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-description')"></i>
                     </div>
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                    <input class="submit disable" type="submit" value="Добавить проект"/>
+                    <input class="submit disable project-submit" type="submit" value="Добавить проект"/>
                 </form>
             </div>
         </div>
         <!--------------------------- modal --------------------------->
+
+        <!--------------------------- user --------------------------->
+        <div class="modal-user" data-close="true">
+            <div class="modal-user__wrap">
+                <button class="close-modal" data-close="true">&times;</button>
+                <h2 class="modal-title">Изменение профиля</h2>
+                <form class="modal-form" action="multipart/form-data" method="post">
+                    <div class="input-wrap">
+                        <input class="input input-email" type="text" name="email" placeholder="Изменить маил">
+                        <i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-email')"></i>
+                    </div>
+                    <div class="input-wrap">
+                        <input class="input input-password" name="password" placeholder="Изменить пароль">
+                        <i class="fa fa-times" aria-hidden="true" onclick="clearInput('input-password')"></i>
+                    </div>
+                    <div class="change-avatar">
+                        <p>Изменить аватар:</p>
+                        <input type="file" name="file">
+                    </div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <input class="submit disable" type="submit" value="Сохранить"/>
+                </form>
+                ${changePasswordMessage!}
+                ${changeEmailMessage!}
+                ${changeAvatarMessage!}
+            </div>
+        </div>
+        <!--------------------------- user --------------------------->
     </div>
     <script src="../static/js/main.js"></script>
     <script src="../static/js/add-project.js"></script>
+    <script src="../static/js/change-profile.js"></script>
     <script src="../static/js/user-list.js"></script>
 </body>
 </html>

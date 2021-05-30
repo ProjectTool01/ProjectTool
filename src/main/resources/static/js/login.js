@@ -6,7 +6,10 @@ const visibiliryBtn = document.querySelectorAll('.fa-eye');
 let isActiveSubmit = false;
 
 function loginValidation() {
-    isActiveSubmit = password.value.length >= 1 && username.value.length >= 1;
+    isActiveSubmit =
+        password.value.length >= 4 && password.value.length <= 64 &&
+        username.value.length >= 4 && username.value.length <= 64 &&
+        /^[a-zA-Z1-9]+$/.test(username.value) === true;
     if (isActiveSubmit) {
         submit.classList.remove('disable');
         submit.disabled = false;
