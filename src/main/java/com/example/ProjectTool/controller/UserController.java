@@ -89,7 +89,7 @@ public class UserController {
                                                 @RequestParam String email,
                                                 @RequestParam("file") MultipartFile file) {
 
-        ModelAndView modelAndView = new ModelAndView("userProfileChangeData");
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
         userService.changeUserData(user, password, email, file);
         if (!password.isEmpty()) {
             modelAndView.addObject("changePasswordMessage", "Пароль успешно изменен!");
