@@ -31,6 +31,7 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home");
         Set<Project> projects = user.getProjects();
         modelAndView.addObject("projects", projects);
+
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
             Project project = projectRepo.findById(projectId);
