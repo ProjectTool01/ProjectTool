@@ -77,7 +77,7 @@
 				<div class="project-info">
 					<div class="project-info__left">
 						<div>
-							<div class="project-info__title">Название проекта</div>
+							<div class="project-info__title">${project.name}</div>
 							<div class="project-description">Описание проекта</div>
 							<div class="project-owner">Владелец проекта:<span>TETSUKER</span></div>
 							<div class="project-identificator">Идентификатор проекта:<span>1235</span></div>
@@ -129,7 +129,7 @@
 				<div class="select-project card">
 					<div class="card-title">Projects <span></span></div>
 					<div class="card-content">
-						<#--<#list>-->
+						<#list projects as item>
 							<a href="/home">
 								<div class="card-item">
 									<div class="person-img"><img src="/img/${avatar}"></div>
@@ -139,7 +139,7 @@
 									</div>
 								</div>
 							</a>
-						<#--</#list>-->
+						</#list>
 					</div>
 				</div>
 			</div>
