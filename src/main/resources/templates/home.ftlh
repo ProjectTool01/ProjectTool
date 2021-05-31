@@ -116,8 +116,8 @@
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
 						<div class="card-content">
-							<#if project?has_content>
-								<#list project.tasks as task>
+							<#if tasks?has_content>
+								<#list tasks as task>
 									<div class="card-item">
 										<div class="task-status">${task.status?substring(0,1)}</div>
 										<div class="task-right">
