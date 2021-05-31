@@ -77,7 +77,7 @@ public class ProjectController {
                 modelAndView.addObject("err", "3");
                 return modelAndView;
             }
-            List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));
+            List<Task> tasks = taskRepo.findAllByProjectOrderById(projectRepo.findById(projectId));
             List<Message> messages = messageRepo.findMessagesByProjectId(projectId);
             modelAndView.setViewName("projectPage");
             modelAndView.addObject("tasks", tasks);
@@ -201,7 +201,7 @@ public class ProjectController {
             }
             Project project = projectRepo.findById(projectId);
             modelAndView.addObject("project", project);
-            List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));
+            List<Task> tasks = taskRepo.findAllByProjectOrderById(projectRepo.findById(projectId));
             modelAndView.addObject("tasks", tasks);
         }
         return modelAndView;
