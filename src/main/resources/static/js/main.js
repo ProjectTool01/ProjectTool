@@ -1,6 +1,7 @@
 const burger = document.querySelector('.burger-wrap');
 const container = document.querySelector('.content');
 const user = document.querySelector('.user');
+const projects = document.querySelectorAll('.select-project .card-item');
 let isDropDownMenuOpened = false;
 
 function openMenu() {
@@ -22,3 +23,4 @@ container.addEventListener('click', () => {
 });
 burger.addEventListener('click', () => openMenu('burger'));
 user.addEventListener("click", () => openDropDownMenu('user'));
+document.querySelector('.select-project span').innerHTML = projects.length;
