@@ -33,6 +33,10 @@ public class HomeController {
         modelAndView.addObject("projects", projects);
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
+            if (!user.getProjects().contains(projectRepo.findById(projectId))) {
+                modelAndView.setViewName("redirect:/home");
+                return modelAndView;
+            }
             Project project = projectRepo.findById(projectId);
             modelAndView.addObject("project", project);
         }
