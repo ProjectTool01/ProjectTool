@@ -1,5 +1,4 @@
 const invitations = document.querySelectorAll('.invitations .card-item');
-const projects = document.querySelectorAll('.select-project .card-item');
 const tasks = document.querySelectorAll('.tasks .card-item');
 
 let canvas = document.querySelector('.pie-chart')
@@ -10,7 +9,6 @@ const result = document.querySelector('.result');
 
 //Кол-во приглашений, задач и проектов
 document.querySelector('.invitations span').innerHTML = invitations.length;
-document.querySelector('.select-project span').innerHTML = projects.length;
 document.querySelector('.tasks span').innerHTML = tasks.length;
 
 //Pie chart
