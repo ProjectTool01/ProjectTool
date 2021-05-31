@@ -17,6 +17,9 @@ public class Project {
 
     private String name;
 
+    @OneToMany(mappedBy = "project")
+    private Set<Task> tasks;
+
     @Column(name = "project_identifier")
     private String projectIdentifier;
 
