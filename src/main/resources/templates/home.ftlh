@@ -119,8 +119,17 @@
 							<#if project?has_content>
 								<#list project.tasks as task>
 									<div class="card-item">
-										<div class="task-status">${task.status?cap_first}</div>
-										<div class="task-text">${task.taskText}</div>
+										<div class="task-status">${task.status?substring(0,1)}</div>
+										<div class="task-right">
+											<div class="task-owner">
+											<#if task.taskOwner?has_content>
+												${task.taskOwner.username!}
+											<#else>
+												Не назначена
+											</#if>
+											</div>
+											<div class="task-text">${task.taskText}</div>
+										</div>
 									</div>
 								</#list>
 							</#if>
