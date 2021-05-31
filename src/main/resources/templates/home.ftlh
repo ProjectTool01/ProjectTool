@@ -116,12 +116,14 @@
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
 						<div class="card-content">
-							<#--<#list>-->
-								<div class="card-item">
-									<div class="task-status">N</div>
-									<div class="task-text">Make huyna</div>
-								</div>
-							<#--</#list>-->
+							<#if project?has_content>
+								<#list project.tasks as task>
+									<div class="card-item">
+										<div class="task-status">${task.status?cap_first}</div>
+										<div class="task-text">${task.taskText}</div>
+									</div>
+								</#list>
+							</#if>
 						</div>
 					</div>
 				</div>
