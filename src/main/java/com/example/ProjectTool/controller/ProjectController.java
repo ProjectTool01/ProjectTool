@@ -59,7 +59,6 @@ public class ProjectController {
                 modelAndView.addObject("message", "Неизвестная ошибка: " + err + "!");
                 break;
         }
-
         return modelAndView;
     }
 
@@ -89,9 +88,7 @@ public class ProjectController {
             modelAndView.addObject("err", "2");
             return modelAndView;
         }
-
         return modelAndView;
-
     }
 
     @PostMapping("/addProject")
@@ -104,7 +101,6 @@ public class ProjectController {
         } else {
             projectService.addProject(user, projectIdentifier);
         }
-
         return modelAndView;
     }
 
@@ -121,7 +117,6 @@ public class ProjectController {
         } else {
             modelAndView.addObject("err", "1");
         }
-
         return modelAndView;
     }
 
@@ -133,7 +128,6 @@ public class ProjectController {
 
         Project project = projectRepo.findById(Long.parseLong(id));
         projectService.createTask(project, user, name, text);
-
         return "redirect:/project" + project.getId();
     }
 
@@ -145,7 +139,6 @@ public class ProjectController {
         Project project = projectRepo.findById(Long.parseLong(projectId));
         Task task = taskRepo.findById(Long.parseLong(taskId));
         projectService.takeTask(task, user);
-
         return "redirect:/project" + project.getId();
     }
 
@@ -156,7 +149,6 @@ public class ProjectController {
         Project project = projectRepo.findById(Long.parseLong(projectId));
         Task task = taskRepo.findById(Long.parseLong(taskId));
         projectService.doneTask(task);
-
         return "redirect:/project" + project.getId();
     }
 
@@ -170,10 +162,37 @@ public class ProjectController {
         if(!text.isEmpty() && project != null){
             projectService.addMessage(project, user, text);
         }
-
         return "redirect:/project" + project.getId();
     }
 
+    @GetMapping("/messages")
+    public ModelAndView getMessages(@RequestParam(defaultValue = "", required = false) String pid,
+                             @AuthenticationPrincipal User user) {
 
+        ModelAndView modelAndView = new ModelAndView("messages");
+        Set<Project> projects = user.getProjects();
+        modelAndView.addObject("projects", projects);
+        if(!pid.isEmpty()){
+            long projectId = Long.parseLong(pid);
+            List<Message> messages = messageRepo.findMessagesByProjectId(projectId);
+            modelAndView.addObject("messages", messages);
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/tasks")
+    public ModelAndView getTasks(@RequestParam(defaultValue = "", required = false) String pid,
+                             @AuthenticationPrincipal User user) {
+
+        ModelAndView modelAndView = new ModelAndView("tasks");
+        Set<Project> projects = user.getProjects();
+        modelAndView.addObject("projects", projects);
+        if(!pid.isEmpty()){
+            long projectId = Long.parseLong(pid);
+            List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));
+            modelAndView.addObject("tasks", tasks);
+        }
+        return modelAndView;
+    }
 
 }
