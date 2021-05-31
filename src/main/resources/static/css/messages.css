@@ -1,0 +1,13 @@
+.messages {
+    margin-left: 50px;
+}
+
+.messages .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+}
+
+.message {
+    margin: 10px 0;
+}

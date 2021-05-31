@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -24,11 +25,11 @@
 				<i class="fa fa-home" aria-hidden="true"></i>
 				Главная
 			</a>
-			<a href="" class="side-menu__link">
+			<a href="/tasks" class="side-menu__link">
 				<i class="fa fa-check-circle" aria-hidden="true"></i>
 				Задачи
 			</a>
-			<a href="" class="side-menu__link">
+			<a href="/messages" class="side-menu__link">
 				<i class="fa fa-comment" aria-hidden="true"></i>
 				Сообщения
 			</a>

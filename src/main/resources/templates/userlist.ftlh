@@ -14,31 +14,31 @@
     <title>ProjectTool</title>
 </head>
 <body>
-    <!--------------------------- side_menu --------------------------->
-    <div id="sidemenu">
-        <div class="side_menu-logo">
-            <div class="main-title">Project<span>Tool</span></div>
-        </div>
-        <nav class="side-menu__buttons">
-            <a href="/home" class="side-menu__link">
-                <i class="fa fa-home" aria-hidden="true"></i>
-                Главная
-            </a>
-            <a href="" class="side-menu__link">
-                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                Задачи
-            </a>
-            <a href="" class="side-menu__link">
-                <i class="fa fa-comment" aria-hidden="true"></i>
-                Сообщения
-            </a>
-            <a href="/userlist" class="side-menu__link">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                Пользователи
-            </a>
-        </nav>
+<!--------------------------- side_menu --------------------------->
+<div id="sidemenu">
+    <div class="side_menu-logo">
+        <div class="main-title">Project<span>Tool</span></div>
     </div>
-    <!--------------------------- side_menu --------------------------->
+    <nav class="side-menu__buttons">
+        <a href="/home" class="side-menu__link">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            Главная
+        </a>
+        <a href="/tasks" class="side-menu__link">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            Задачи
+        </a>
+        <a href="/messages" class="side-menu__link">
+            <i class="fa fa-comment" aria-hidden="true"></i>
+            Сообщения
+        </a>
+        <a href="/userlist" class="side-menu__link">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            Пользователи
+        </a>
+    </nav>
+</div>
+<!--------------------------- side_menu --------------------------->
 
     <div class="main" id="main">
         <!--------------------------- header --------------------------->
@@ -86,7 +86,7 @@
                         <div class="input-wrap">
                             <input class="input" type="text" name="username" value="${username!}" placeholder="Имя пользователя">
                         </div>
-                        <button class="search-button" type="submit">></button>
+                        <button class="send-button" type="submit">></button>
                     </form>
                 </div>
             </div>
