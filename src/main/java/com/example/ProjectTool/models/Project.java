@@ -98,6 +98,14 @@ public class Project {
         this.projectIdentifier = projectIdentifier;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
