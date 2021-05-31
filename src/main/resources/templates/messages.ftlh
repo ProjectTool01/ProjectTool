@@ -90,20 +90,24 @@
             </div>
         </div>
         <div class="card messages">
-            <div class="card-title"><#if project?has_content>${project.name}Chat<#else>Project Name Chat</#if></div>
+            <div class="card-title"><#if project?has_content>${project.name} Chat<#else>Select project</#if></div>
             <div class="card-content">
                 <#if messages?has_content>
                     <#list messages as message>
                         <div class="message">
-                            ${message.fromUser.username} сказал ${message.text}, время ${message.messageTime}
+                            <div class="message-header">
+                                <div class="message-name">${message.fromUser.username}</div>
+                                <div class="message-time">${message.messageTime}</div>
+                            </div>
+                            <div class="message-text">${message.text}</div>
                         </div>
                     </#list>
                 <#else>
-                    Select project
+                    No messages
                 </#if>
             </div>
             <div class="card-footer">
-                <form method="get" action="/sendMessage">
+                <form method="post" action="/sendMessage">
                     <div class="input-wrap">
                         <input class="input" type="text" name="text" placeholder="Введите сообщение">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
