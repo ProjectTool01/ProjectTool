@@ -174,6 +174,8 @@ public class ProjectController {
         modelAndView.addObject("projects", projects);
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
+            Project project = projectRepo.findById(projectId);
+            modelAndView.addObject("project", project);
             List<Message> messages = messageRepo.findMessagesByProjectId(projectId);
             modelAndView.addObject("messages", messages);
         }
@@ -189,6 +191,8 @@ public class ProjectController {
         modelAndView.addObject("projects", projects);
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
+            Project project = projectRepo.findById(projectId);
+            modelAndView.addObject("project", project);
             List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));
             modelAndView.addObject("tasks", tasks);
         }
