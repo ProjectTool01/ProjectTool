@@ -17,6 +17,9 @@ public class Project {
 
     private String name;
 
+    @OneToMany(mappedBy = "project")
+    private Set<Task> tasks;
+
     @Column(name = "project_identifier")
     private String projectIdentifier;
 
@@ -93,6 +96,14 @@ public class Project {
 
     public void setProjectIdentifier(String projectIdentifier) {
         this.projectIdentifier = projectIdentifier;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override

@@ -174,6 +174,10 @@ public class ProjectController {
         modelAndView.addObject("projects", projects);
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
+            if (!user.getProjects().contains(projectRepo.findById(projectId))) {
+                modelAndView.setViewName("redirect:/messages");
+                return modelAndView;
+            }
             Project project = projectRepo.findById(projectId);
             modelAndView.addObject("project", project);
             List<Message> messages = messageRepo.findMessagesByProjectId(projectId);
@@ -191,6 +195,10 @@ public class ProjectController {
         modelAndView.addObject("projects", projects);
         if(!pid.isEmpty()){
             long projectId = Long.parseLong(pid);
+            if (!user.getProjects().contains(projectRepo.findById(projectId))) {
+                modelAndView.setViewName("redirect:/tasks");
+                return modelAndView;
+            }
             Project project = projectRepo.findById(projectId);
             modelAndView.addObject("project", project);
             List<Task> tasks = taskRepo.findAllByProject(projectRepo.findById(projectId));

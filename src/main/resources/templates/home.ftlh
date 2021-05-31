@@ -116,12 +116,23 @@
 					<div class="tasks card">
 						<div class="card-title">Tasks <span></span></div>
 						<div class="card-content">
-							<#--<#list>-->
-								<div class="card-item">
-									<div class="task-status">N</div>
-									<div class="task-text">Make huyna</div>
-								</div>
-							<#--</#list>-->
+							<#if tasks?has_content>
+								<#list tasks as task>
+									<div class="card-item">
+										<div class="task-status">${task.status?substring(0,1)}</div>
+										<div class="task-right">
+											<div class="task-owner">
+											<#if task.taskOwner?has_content>
+												${task.taskOwner.username!}
+											<#else>
+												Не назначена
+											</#if>
+											</div>
+											<div class="task-text">${task.taskText}</div>
+										</div>
+									</div>
+								</#list>
+							</#if>
 						</div>
 					</div>
 				</div>
