@@ -95,7 +95,7 @@ public class ProjectController {
     public ModelAndView postAddProjects(@AuthenticationPrincipal User user,
                                         @RequestParam String projectIdentifier) {
 
-        ModelAndView modelAndView = new ModelAndView("redirect:projects");
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
         if (projectRepo.findByProjectIdentifier(projectIdentifier) == null) {
             modelAndView.addObject("err", "2");
         } else {
@@ -110,7 +110,7 @@ public class ProjectController {
                                           @RequestParam String text) {
 
 
-        ModelAndView modelAndView = new ModelAndView("redirect:projects");
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
         if (!name.isEmpty() && !text.isEmpty()) {
             projectService.createProject(user, name, text);
@@ -128,7 +128,7 @@ public class ProjectController {
 
         Project project = projectRepo.findById(Long.parseLong(id));
         projectService.createTask(project, user, name, text);
-        return "redirect:/project" + project.getId();
+        return "redirect:/tasks?pid=" + project.getId();
     }
 
     @PostMapping("/takeTask")
@@ -139,7 +139,7 @@ public class ProjectController {
         Project project = projectRepo.findById(Long.parseLong(projectId));
         Task task = taskRepo.findById(Long.parseLong(taskId));
         projectService.takeTask(task, user);
-        return "redirect:/project" + project.getId();
+        return "redirect:/tasks?pid=" + project.getId();
     }
 
     @PostMapping("/doneTask")
@@ -149,7 +149,7 @@ public class ProjectController {
         Project project = projectRepo.findById(Long.parseLong(projectId));
         Task task = taskRepo.findById(Long.parseLong(taskId));
         projectService.doneTask(task);
-        return "redirect:/project" + project.getId();
+        return "redirect:/tasks?pid=" + project.getId();
     }
 
     @PostMapping("/sendMessage")
@@ -162,7 +162,7 @@ public class ProjectController {
         if(!text.isEmpty() && project != null){
             projectService.addMessage(project, user, text);
         }
-        return "redirect:/project" + project.getId();
+        return "redirect:/messages?pid=" + project.getId();
     }
 
     @GetMapping("/messages")
