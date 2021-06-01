@@ -1,4 +1,5 @@
 .messages {
+    max-height: 800px;
     margin-left: 50px;
 }
 
@@ -26,6 +27,6 @@
 
 .message-time {
     font-size: 10px;
-    color: #6f6e6e;
+    color: #8492af;
     margin-left: 10px;
 }
