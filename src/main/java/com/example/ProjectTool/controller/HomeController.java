@@ -1,8 +1,10 @@
 package com.example.ProjectTool.controller;
 
 import com.example.ProjectTool.models.Project;
+import com.example.ProjectTool.models.Task;
 import com.example.ProjectTool.models.User;
 import com.example.ProjectTool.repos.ProjectRepo;
+import com.example.ProjectTool.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -18,6 +21,9 @@ public class HomeController {
 
     @Autowired
     private ProjectRepo projectRepo;
+
+    @Autowired
+    private TaskRepo taskRepo;
 
     @GetMapping("/")
     public String greeting() {
@@ -40,6 +46,8 @@ public class HomeController {
             }
             Project project = projectRepo.findById(projectId);
             modelAndView.addObject("project", project);
+            List<Task> tasks = taskRepo.findAllByProjectOrderById(projectRepo.findById(projectId));
+            modelAndView.addObject("tasks", tasks);
         }
 
         return modelAndView;

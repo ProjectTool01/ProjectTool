@@ -1,0 +1,66 @@
+.select-project {
+    max-width: 300px;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.card-content, .card-item, .card-item__right {
+    min-width: 250px;
+    width: 100%;
+}
+
+.card-item__right {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-item__left-header {
+    display: flex;
+}
+
+.task-name {
+    font-weight: bold;
+}
+
+.task-owner {
+    color: #8492af;
+    margin-left: 10px;
+}
+
+.card-item__left-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.task-text {
+    max-width: 250px;
+}
+
+.take-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #5584ff;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    margin: 0 0 5px 10px;
+}
+
+.complete {
+    background-color: #00fc00;
+}
+
+.taken-tasks, .done-tasks {
+    border-left: 1px solid #000;
+}

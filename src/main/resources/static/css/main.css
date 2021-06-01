@@ -311,7 +311,11 @@ input {
 }
 
 .card-title span {
-    padding: 1px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    min-height: 40px;
     color: #fff;
     background-color: #5584ff;
     border-radius: 50%;
@@ -320,7 +324,6 @@ input {
 
 .card-content {
     height: 100%;
-    overflow: hidden;
     overflow-y: scroll;
     scrollbar-width: none;
 }
@@ -331,7 +334,7 @@ input {
 
 .card-item {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     border-bottom: 1px solid #000;
     padding: 10px;
@@ -340,7 +343,7 @@ input {
 .card-text{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     font-size: 20px;
 }
 

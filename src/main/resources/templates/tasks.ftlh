@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/tasks.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>ProjectTool</title>
 </head>
@@ -76,7 +77,7 @@
             <div class="card-title">Projects <span></span></div>
             <div class="card-content">
                 <#list projects as item>
-                    <a href="/home?pid=${item.id}">
+                    <a href="/tasks?pid=${item.id}">
                         <div class="card-item">
                             <div class="person-img"><img src="/img/${avatar}"></div>
                             <div class="select-project__info">
@@ -86,6 +87,108 @@
                         </div>
                     </a>
                 </#list>
+            </div>
+        </div>
+        <div class="tasks card">
+            <div class="new-tasks">
+                <div class="card-title">NEW<span>1</span></div>
+                <div class="card-content">
+                    <#if tasks?has_content>
+                        <#list tasks as task>
+                            <#if task.status?substring(0,1)='N'>
+                                <div class="card-item">
+                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="card-item__right">
+                                        <div class="card-item__left-header">
+                                            <div class="task-name">${task.name}</div>
+                                        </div>
+                                        <div class="card-item__left-footer">
+                                            <div class="task-text">
+                                                ${task.taskText}
+                                            </div>
+                                            <form method="post" action="/takeTask">
+                                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                <div><input class="take-button" type="submit" value="+"/></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </#if>
+                        </#list>
+                    </#if>
+                </div>
+            </div>
+            <div class="taken-tasks">
+                <div class="card-title">TAKEN<span>1</span></div>
+                <div class="card-content">
+                    <#if tasks?has_content>
+                        <#list tasks as task>
+                            <#if task.status?substring(0,1)='T'>
+                                <div class="card-item">
+                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="card-item__right">
+                                        <div class="card-item__left-header">
+                                            <div class="task-name">${task.name}</div>
+                                            <div class="task-owner">${task.taskOwner.username!}</div>
+                                        </div>
+                                        <div class="card-item__left-footer">
+                                            <div class="task-text">
+                                                ${task.taskText}
+                                            </div>
+                                            <div class="buttons">
+                                                <form method="post" action="/takeTask">
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                    <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                    <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                    <div><input class="take-button" type="submit" value="+"/></div>
+                                                </form>
+                                                <form method="post" action="/doneTask">
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                    <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                    <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                    <div><input class="take-button complete" type="submit" value="&#10004;"/></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </#if>
+                        </#list>
+                    </#if>
+                </div>
+            </div>
+            <div class="done-tasks">
+                <div class="card-title">DONE<span>1</span></div>
+                <div class="card-content">
+                    <#if tasks?has_content>
+                        <#list tasks as task>
+                            <#if task.status?substring(0,1)='D'>
+                                <div class="card-item">
+                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="card-item__right">
+                                        <div class="card-item__left-header">
+                                            <div class="task-name">${task.name}</div>
+                                            <div class="task-owner">
+                                                <#if task.taskOwner?has_content>
+                                                    ${task.taskOwner.username!}
+                                                <#else>
+                                                    Нету
+                                                </#if>
+                                            </div>
+                                        </div>
+                                        <div class="card-item__left-footer">
+                                            <div class="task-text">
+                                                ${task.taskText}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </#if>
+                        </#list>
+                    </#if>
+                </div>
             </div>
         </div>
     </div>
