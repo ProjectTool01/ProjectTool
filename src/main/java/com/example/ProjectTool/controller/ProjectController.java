@@ -126,9 +126,10 @@ public class ProjectController {
                                  @RequestParam String text,
                                  @RequestParam String id) {
 
-        Project project = projectRepo.findById(Long.parseLong(id));
+        long projectId = Long.parseLong(id);
+        Project project = projectRepo.findById(projectId);
         projectService.createTask(project, user, name, text);
-        return "redirect:/tasks?pid=" + project.getId();
+        return "redirect:/tasks?pid=" + id;
     }
 
     @PostMapping("/takeTask")
@@ -162,7 +163,19 @@ public class ProjectController {
         if(!text.isEmpty() && project != null){
             projectService.addMessage(project, user, text);
         }
-        return "redirect:/messages?pid=" + project.getId();
+        return "redirect:/messages?pid=" + id;
+    }
+
+    @PostMapping("/deleteProject")
+    public String postDeleteProject(@AuthenticationPrincipal User user,
+                                    @RequestParam String id){
+
+        long projectId = Long.parseLong(id);
+        Project project = projectRepo.findById(projectId);
+        if(project != null && project.getProjectOwner().getId() == user.getId()){
+            projectService.deleteProject(project);
+        }
+        return "redirect:/projects?pid=" + id;
     }
 
     @GetMapping("/messages")

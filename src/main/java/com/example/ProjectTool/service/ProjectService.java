@@ -28,7 +28,6 @@ public class ProjectService {
     private UserRepo userRepo;
 
     public void createProject(User user, String name, String text) {
-
         Project project = new Project(user, name, text);
         projectRepo.save(project);
         user.getProjects().add(project);
@@ -37,47 +36,40 @@ public class ProjectService {
         userRepo.save(user);
         user.setProjects(projects);
         userRepo.save(user);
-
     }
 
     public void addProject(User user, String projectIdentifier) {
-
         user.getProjects().add(projectRepo.findByProjectIdentifier(projectIdentifier));
         Set<Project> projects = new HashSet<>(user.getProjects());
         user.getProjects().clear();
         userRepo.save(user);
         user.setProjects(projects);
         userRepo.save(user);
-
     }
 
     public void addMessage(Project project, User user, String text) {
-
         Message message = new Message(project, user, text);
         messageRepo.save(message);
-
     }
 
     public void createTask(Project project, User user, String name, String text) {
-
         Task task = new Task(project, user, name, text);
         taskRepo.save(task);
-
     }
 
     public void takeTask(Task task, User user){
-
         task.setTaskOwner(user);
         task.setStatus(Status.TAKEN);
         taskRepo.save(task);
-
     }
 
     public void doneTask(Task task){
-
         task.setStatus(Status.DONE);
         taskRepo.save(task);
-
     }
 
+    public void deleteProject(Project project) {
+        project.setDeleted(true);
+        projectRepo.save(project);
+    }
 }
