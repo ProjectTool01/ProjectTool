@@ -17,8 +17,7 @@ function drawCanvas() {
     let myTotal = 0;
     let lastend = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for(let e = 0; e < data.length; e++)
-    {
+    for(let e = 0; e < data.length; e++) {
         myTotal += data[e];
     }
 

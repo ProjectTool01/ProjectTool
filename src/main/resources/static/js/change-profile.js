@@ -3,6 +3,7 @@ const settingsModal = document.querySelector('.modal-user');
 const settingsWrap = document.querySelector('.modal-user__wrap');
 const email = document.querySelector('.modal-user .input-email');
 const password = document.querySelector('.modal-user .input-password');
+const fileInput = document.querySelector('.modal-user .file-input');
 const userSubmit = document.querySelector('.modal-user .submit');
 const userClose = document.querySelectorAll('.modal-user .fa-times');
 let isSettingsOpened = false;
@@ -24,7 +25,7 @@ settingsModal.addEventListener('click', event => {
 })
 
 function validateUser() {
-    isActiveSettingsSubmit = email.value.length > 1 || password.value.length > 1;
+    isActiveSettingsSubmit = email.value.length > 1 || password.value.length > 1 || fileInput.value;
     if (isActiveSettingsSubmit) {
         userSubmit.classList.remove('disable');
         userSubmit.disabled = false;
@@ -34,7 +35,7 @@ function validateUser() {
     }
 }
 
-[email, password].forEach(function(element) {
+[email, password, fileInput].forEach(function(element) {
     element.addEventListener("input", function() {
         validateUser();
     });
