@@ -157,7 +157,7 @@
                 </div>
                 <div class="change-avatar">
                     <p>Изменить аватар:</p>
-                    <input type="file" name="file">
+                    <input class="file-input" type="file" name="file">
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <input class="submit disable" type="submit" value="Сохранить"/>

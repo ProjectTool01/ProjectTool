@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
     <link rel="stylesheet" type="text/css" href="../static/css/tasks.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>ProjectTool</title>
 </head>
@@ -91,7 +91,7 @@
         </div>
         <div class="tasks card">
             <div class="new-tasks">
-                <div class="card-title">NEW<span>1</span></div>
+                <div class="card-title">NEW<span></span></div>
                 <div class="card-content">
                     <#if tasks?has_content>
                         <#list tasks as task>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="taken-tasks">
-                <div class="card-title">TAKEN<span>1</span></div>
+                <div class="card-title">TAKEN<span></span></div>
                 <div class="card-content">
                     <#if tasks?has_content>
                         <#list tasks as task>
@@ -160,7 +160,7 @@
                 </div>
             </div>
             <div class="done-tasks">
-                <div class="card-title">DONE<span>1</span></div>
+                <div class="card-title">DONE<span></span></div>
                 <div class="card-content">
                     <#if tasks?has_content>
                         <#list tasks as task>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="change-avatar">
                     <p>Изменить аватар:</p>
-                    <input type="file" name="file">
+                    <input class="file-input" type="file" name="file">
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <input class="submit disable" type="submit" value="Сохранить"/>
@@ -246,5 +246,6 @@
 <script src="../static/js/main.js"></script>
 <script src="../static/js/add-project.js"></script>
 <script src="../static/js/change-profile.js"></script>
+<script src="../static/js/tasks.js"></script>
 </body>
 </html>
