@@ -1,4 +1,8 @@
 /*select-project==================================*/
+.select-project {
+    max-height: 800px;
+}
+
 .select-project .card-item {
     cursor: pointer;
 }
