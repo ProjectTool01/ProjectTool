@@ -175,7 +175,7 @@ public class ProjectController {
         if(project != null && project.getProjectOwner().getId() == user.getId()){
             projectService.deleteProject(project);
         }
-        return "redirect:/projects?pid=" + id;
+        return "redirect:/home?pid=" + id;
     }
 
     @GetMapping("/messages")
