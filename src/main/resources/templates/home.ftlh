@@ -84,8 +84,13 @@
 							<div class="project-identificator">Идентификатор проекта:<span><#if project?has_content>${project.projectIdentifier}</#if></span></div>
 							<div class="project-info__members">Members: <span>9</span></div>
 							<div class="project-info__tasks">Tasks: <span>100</span></div>
+							<div class=""><#if project?has_content>${project.deleted?c}</#if></div>
 						</div>
-						<button class="button decline">Close Project</button>
+						<form action="/deleteProject" method="post">
+							<input type="hidden" name="id" value="<#if project?has_content>${project.id}</#if>"/>
+							<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+							<input class="button decline" type="submit" value="Close Project"/>
+						</form>
 					</div>
 					<div class="project-info__right">
 						<canvas class="pie-chart" width="200" height="200"></canvas>
@@ -195,7 +200,7 @@
 					</div>
 					<div class="change-avatar">
 						<p>Изменить аватар:</p>
-						<input type="file" name="file">
+						<input class="file-input" type="file" name="file">
 					</div>
 					<input type="hidden" name="_csrf" value="${_csrf.token}"/>
 					<input class="submit disable" type="submit" value="Сохранить"/>
