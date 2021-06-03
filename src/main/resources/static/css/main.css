@@ -323,7 +323,6 @@ input {
 }
 
 .card-content {
-    height: 100%;
     overflow-y: scroll;
     scrollbar-width: none;
 }
@@ -358,7 +357,7 @@ input {
     align-items: center;
 }
 
-.card-footer .input-wrap {
+.input-wrap {
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #d4d9e3;

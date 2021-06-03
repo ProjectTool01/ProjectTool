@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/tasks.css">
     <link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/tasks.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>ProjectTool</title>
 </head>
@@ -73,20 +73,40 @@
 
     <!--------------------------- content --------------------------->
     <div class="content">
-        <div class="select-project card">
-            <div class="card-title">Projects <span></span></div>
-            <div class="card-content">
-                <#list projects as item>
-                    <a href="/tasks?pid=${item.id}">
-                        <div class="card-item">
-                            <div class="person-img"><img src="/img/${avatar}"></div>
-                            <div class="select-project__info">
-                                <div class="project-name">${item.name}</div>
-                                <div class="project-description">${item.projectText}</div>
-                            </div>
+        <div class="left-tasks">
+            <div class="card create-task">
+                <div class="card-title">Создание задачи</div>
+                <form method="post" action="/createTask">
+                    <div class="card-content">
+                        <div class="input-wrap">
+                            <input type="text" name="name" placeholder="Название задачи"/>
                         </div>
-                    </a>
-                </#list>
+                        <div class="input-wrap">
+                            <input type="text" name="text" placeholder="Описание задачи"/>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                        <input type="hidden" name="id" value="<#if project?has_content>${project.id}</#if>"/>
+                        <input class="create-task__button" type="submit" value="Создать задачу"/>
+                    </div>
+                </form>
+            </div>
+            <div class="select-project card">
+                <div class="card-title">Projects <span></span></div>
+                <div class="card-content">
+                    <#list projects as item>
+                        <a href="/tasks?pid=${item.id}">
+                            <div class="card-item">
+                                <div class="person-img"><img src="/img/${avatar}"></div>
+                                <div class="select-project__info">
+                                    <div class="project-name">${item.name}</div>
+                                    <div class="project-description">${item.projectText}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </#list>
+                </div>
             </div>
         </div>
         <div class="tasks card">

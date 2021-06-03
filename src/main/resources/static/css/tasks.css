@@ -1,5 +1,48 @@
-.select-project {
+.left-tasks {
+    display: flex;
+    flex-direction: column;
     max-width: 300px;
+}
+
+/*create task==========================================*/
+.create-task {
+    margin-bottom: 20px;
+}
+
+.create-task .card-content{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.input-wrap {
+    margin-bottom: 15px;
+    max-width: none;
+}
+
+.input-wrap input {
+    text-align: start;
+    font-size: 20px;
+}
+
+.create-task__button {
+    padding: 5px 15px;
+    border-radius: 15px;
+    background: #5584ff;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.create-task__button:hover {
+    background: #739aff;
+}
+
+/*select-project=========================================*/
+.select-project {
+    max-height: 580px;
 }
 
 .tasks {
