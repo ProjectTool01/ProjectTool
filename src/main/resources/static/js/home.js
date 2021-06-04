@@ -3,7 +3,7 @@ const tasks = document.querySelectorAll('.tasks .card-item');
 
 let canvas = document.querySelector('.pie-chart')
 let ctx = canvas.getContext('2d');
-let data = [200,60,15];
+let data = [0, 0 ,0];
 let myColor = ['#f6f7fa','#5584ff','#00fc00'];
 const result = document.querySelector('.result');
 
@@ -14,6 +14,21 @@ document.querySelector('.tasks span').innerHTML = tasks.length;
 //Pie chart
 drawCanvas();
 function drawCanvas() {
+    let newTasks = 0;
+    let takenTasks = 0;
+    let doneTasks = 0;
+    tasks.forEach(item => {
+        if (item.querySelector('.task-status').innerHTML === 'N') {
+            newTasks++;
+        } else if (item.querySelector('.task-status').innerHTML === 'T') {
+            takenTasks++;
+        } else if (item.querySelector('.task-status').innerHTML === 'D') {
+            doneTasks++;
+        }
+    });
+    data[0] = newTasks;
+    data[1] = takenTasks;
+    data[2] = doneTasks;
     let myTotal = 0;
     let lastend = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -31,5 +46,9 @@ function drawCanvas() {
         lastend += Math.PI*2*(data[i]/myTotal);
     }
 
-    result.innerHTML = ((data[2] / myTotal) * 100).toFixed(1) + '%';
+    if (data[2] === 0) {
+        result.innerHTML = 0 + '%';
+    } else {
+        result.innerHTML = ((data[2] / myTotal) * 100).toFixed(1) + '%';
+    }
 }

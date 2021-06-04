@@ -30,3 +30,13 @@
     color: #8492af;
     margin-left: 10px;
 }
+
+.messages .input-wrap {
+    max-width: none;
+    width: 100%;
+    justify-content: start;
+}
+
+.messages .send-button {
+    margin-left: 20px;
+}
