@@ -1,9 +1,9 @@
 const button = document.querySelector('.add_project');
-const addProject = document.querySelector('.modal-window');
-const windowWrap = document.querySelector('.modal-window__wrap');
-const name = document.querySelector('.modal-window .input-name');
-const text = document.querySelector('.modal-window .input-description');
-const projectSubmit = document.querySelector('.modal-window .submit');
+const addProject = document.querySelector('.create-project__modal');
+const windowWrap = document.querySelector('.create-project__wrap');
+const name = document.querySelector('.create-project__modal .input-name');
+const text = document.querySelector('.create-project__modal .input-description');
+const projectSubmit = document.querySelector('.create-project__modal .submit');
 const close = document.querySelectorAll('.fa-times');
 let isModalOpened = false;
 let isActiveProject = false;

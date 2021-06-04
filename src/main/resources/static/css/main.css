@@ -155,7 +155,7 @@ input {
     cursor: pointer;
 }
 
-.add_project {
+.header-button {
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -171,7 +171,7 @@ input {
     cursor: pointer;
 }
 
-.add_project:hover {
+.header-button:hover {
     background: #5584ff;
 }
 
