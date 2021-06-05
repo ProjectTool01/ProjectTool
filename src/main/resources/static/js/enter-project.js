@@ -3,9 +3,14 @@ const enterProjectModal = document.querySelector('.enter-project__modal');
 const enterProjectWrap = document.querySelector('.enter-project__wrap');
 const enterProjectIdentifier = document.querySelector('.enter-project__modal .project-identifier');
 const enterProjectSubmit = document.querySelector('.enter-project__modal .submit');
+const close = document.querySelectorAll('.fa-times');
 let isEnterProjectModal = false;
 let isEnterActiveSubmit = false;
 enterProjectSubmit.disabled = true;
+
+function clearInput(input) {
+    document.querySelector('.' + input).value = '';
+}
 
 enterProjectButton.addEventListener('click', () => {
     enterProjectModal.classList.add('active');
@@ -34,4 +39,10 @@ function validateEnter() {
 
 enterProjectIdentifier.addEventListener("input", function() {
     validateEnter();
+});
+
+close.forEach(function(element) {
+    element.addEventListener("click", function() {
+        validateEnter();
+    });
 });
