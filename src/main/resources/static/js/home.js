@@ -1,4 +1,4 @@
-const invitations = document.querySelectorAll('.invitations .card-item');
+const invitations = document.querySelectorAll('.users .card-item');
 const tasks = document.querySelectorAll('.tasks .card-item');
 
 let canvas = document.querySelector('.pie-chart')
@@ -7,8 +7,8 @@ let data = [0, 0 ,0];
 let myColor = ['#f6f7fa','#5584ff','#00fc00'];
 const result = document.querySelector('.result');
 
-//Кол-во приглашений, задач и проектов
-document.querySelector('.invitations span').innerHTML = invitations.length;
+//Кол-во пользователей, задач и проектов
+document.querySelector('.users span').innerHTML = invitations.length;
 document.querySelector('.tasks span').innerHTML = tasks.length;
 document.querySelector('.project-info__tasks span').innerHTML = tasks.length;
 

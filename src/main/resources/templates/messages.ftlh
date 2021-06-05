@@ -196,8 +196,9 @@
             <button class="close-modal" data-close="true">&times;</button>
             <h2 class="modal-title">Данные пользователя</h2>
             Электронная почта: ${email!}<br/>
-            Имя пользователя: ${username!}<br/>
-            Никнейм: ${name!}<br/>
+            Имя пользователя: ${name!}<br/>
+            Фамилия пользователя: ${lastname!}<br/>
+            Никнейм: ${username!}<br/>
         </div>
     </div>
     <!--------------------------- my profile --------------------------->

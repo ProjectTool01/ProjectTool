@@ -1,0 +1,34 @@
+.user-profile {
+    max-width: 500px;
+    max-height: 200px;
+    margin-left: 20px;
+    overflow: hidden;
+}
+.user-profile .card-content{
+    display: flex;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.user-avatar {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.user-avatar img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-username {
+    font-weight: bold;
+}
+
+.user-mail {
+    font-style: italic;
+}

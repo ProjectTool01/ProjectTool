@@ -82,7 +82,7 @@
                 <div class="card-content">
                     <#list users as user>
                         <div class="card-item">
-                            <a href="/id${user.id}">${user.username}</a>
+                            <a href="/userlist?un=${user.username}">${user.username}</a>
                         </div>
                     </#list>
                 </div>
@@ -95,6 +95,20 @@
                     </form>
                 </div>
             </div>
+            <#if usercard?has_content>
+                <div class="user-profile card">
+                    <div class="card-title">Информация о пользователе:</div>
+                    <div class="card-content">
+                        <div class="user-avatar"><img src="/img/${usercard.avatar}" alt=""></div>
+                        <div class="user-bio">
+                            <div class="user-username">${usercard.username}</div>
+                            <div class="user-name">${usercard.name}</div>
+                            <div class="user-lastname">${usercard.surname}</div>
+                            <div class="user-mail">${usercard.email}</div>
+                        </div>
+                    </div>
+                </div>
+            </#if>
         </div>
         <!--------------------------- content --------------------------->
 
@@ -170,8 +184,9 @@
                 <button class="close-modal" data-close="true">&times;</button>
                 <h2 class="modal-title">Данные пользователя</h2>
                 Электронная почта: ${email!}<br/>
-                Имя пользователя: ${username!}<br/>
-                Никнейм: ${name!}<br/>
+                Имя пользователя: ${name!}<br/>
+                Фамилия пользователя: ${lastname!}<br/>
+                Никнейм: ${username!}<br/>
             </div>
         </div>
         <!--------------------------- my profile --------------------------->

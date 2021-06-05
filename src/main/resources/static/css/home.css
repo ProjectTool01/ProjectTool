@@ -69,26 +69,26 @@ canvas {
 	background-color: #00fc00;
 }
 
-/*invitations=====================================*/
-.invitations {
+/*users=====================================*/
+.users {
 	margin-right: 20px;
 	max-height: 400px;
 }
 
-.invitations-buttons {
+.users .card-item {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 }
 
-.invitations-buttons .modal-form {
-	margin: 2px 0;
-	padding: 2px 10px;
+.users .card-item:hover {
+	background-color: #eee;
 }
 
-.invitations .card-item {
-	display: flex;
-	justify-content: space-between;
+.users .user-name {
+	font-weight: bold;
+}
+
+.users a {
+	text-decoration: none;
 }
 
 /*tasks==========================================*/

@@ -104,24 +104,22 @@
 					</div>
 				</div>
 				<div class="content-left__bottom">
-					<div class="invitations card">
-						<div class="card-title">Invitations <span></span></div>
+					<div class="users card">
+						<div class="card-title">Users <span></span></div>
 						<div class="card-content">
-							<#--<#list>-->
-								<div class="card-item">
-									<div class="card-text">Super Puper Project Name</div>
-									<div class="invitations-buttons">
-										<form class="modal-form" action="/accept" method="post">
-											<input type="hidden" name="_csrf" value="${_csrf.token}"/>
-											<input class="button accept" type="submit" value="Accept"/>
-										</form>
-										<form class="modal-form" action="/decline" method="post">
-											<input type="hidden" name="_csrf" value="${_csrf.token}"/>
-											<input class="button decline" type="submit" value="Decline"/>
-										</form>
-									</div>
-								</div>
-							<#--</#list>-->
+							<#if project?has_content>
+								<#list project.users as user>
+									<a href="/userlist?un=${user.username}" class="user-link">
+										<div class="card-item">
+											<div class="person-img"><img src="/img/${user.avatar}"></div>
+											<div class="user-right">
+												<div class="user-name">${user.username}</div>
+												<div class="user-fio">${user.name} ${user.surname}</div>
+											</div>
+										</div>
+									</a>
+								</#list>
+							</#if>
 						</div>
 					</div>
 					<div class="tasks card">
@@ -242,8 +240,9 @@
 				<button class="close-modal" data-close="true">&times;</button>
 				<h2 class="modal-title">Данные пользователя</h2>
 				Электронная почта: ${email!}<br/>
-				Имя пользователя: ${username!}<br/>
-				Никнейм: ${name!}<br/>
+				Имя пользователя: ${name!}<br/>
+				Фамилия пользователя: ${lastname!}<br/>
+				Никнейм: ${username!}<br/>
 			</div>
 		</div>
 		<!--------------------------- my profile --------------------------->
