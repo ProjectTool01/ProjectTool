@@ -18,17 +18,17 @@ public class ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "redirect:/home";
+                return "error/404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "redirect:/home";
+                return "error/500";
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                return "redirect:/home";
+                return "error/403";
             } else if (statusCode == HttpStatus.UNAUTHORIZED.value()) {
-                return "redirect:/home";
+                return "error/401";
             } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
-                return "redirect:/home";
+                return "error/401";
             }
         }
-        return "redirect:/home";
+        return "error/error";
     }
 }
