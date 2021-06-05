@@ -76,9 +76,13 @@ public class UserController {
         modelAndView.addObject("filter", username);
         modelAndView.addObject("users", users);
         if(!uid.isEmpty()){
-            long userId = Long.parseLong(uid);
-            User user = userRepo.findById(userId);
-            modelAndView.addObject("usercard", user);
+            try {
+                long userId = Long.parseLong(uid);
+                User user = userRepo.findById(userId);
+                modelAndView.addObject("usercard", user);
+            } catch (NumberFormatException e) {
+                modelAndView.setViewName("redirect:/userlist");
+            }
         }
 
         return modelAndView;
