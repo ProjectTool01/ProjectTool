@@ -8,10 +8,10 @@ known = Session.SPRING_SECURITY_CONTEXT??
     userId = user.getId()
     isAdmin = user.isAdmin()
     avatar = user.getAvatar()
-        username = user.getUsername()
-        email = user.getEmail()
-        name = user.getName()
-        lastname = user.getSurname()
+    username = user.getUsername()
+    email = user.getEmail()
+    name = user.getName()
+    lastname = user.getSurname()
     >
 <#else>
     <#assign
