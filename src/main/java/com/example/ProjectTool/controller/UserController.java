@@ -66,7 +66,7 @@ public class UserController {
 
     @GetMapping("/userlist")
     public ModelAndView userMappingRedirect(@RequestParam(required = false, defaultValue = "") String username,
-                                            @RequestParam(required = false, defaultValue = "") String uid) {
+                                            @RequestParam(required = false, defaultValue = "") String un) {
 
         ModelAndView modelAndView = new ModelAndView("userlist");
         List<User> users = userRepo.findAll();
@@ -75,14 +75,9 @@ public class UserController {
         }
         modelAndView.addObject("filter", username);
         modelAndView.addObject("users", users);
-        if(!uid.isEmpty()){
-            try {
-                long userId = Long.parseLong(uid);
-                User user = userRepo.findById(userId);
-                modelAndView.addObject("usercard", user);
-            } catch (NumberFormatException e) {
-                modelAndView.setViewName("redirect:/userlist");
-            }
+        if(!un.isEmpty()){
+            User user = userRepo.findByUsername(un);
+            modelAndView.addObject("usercard", user);
         }
 
         return modelAndView;
