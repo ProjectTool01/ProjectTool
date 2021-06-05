@@ -91,7 +91,11 @@
                     <div class="card-footer">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <input type="hidden" name="id" value="<#if project?has_content>${project.id}</#if>"/>
-                        <input class="create-task__button" type="submit" value="Создать задачу"/>
+                            <#if project?has_content>
+                                <#if !project.deleted>
+                                    <input class="create-task__button" type="submit" value="Создать задачу"/>
+                                </#if>
+                            </#if>
                     </div>
                 </form>
             </div>
@@ -120,7 +124,7 @@
                         <#list tasks as task>
                             <#if task.status?substring(0,1)='N'>
                                 <div class="card-item">
-                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="person-img"><img src="/img/${task.taskStarter.avatar}"></div>
                                     <div class="card-item__right">
                                         <div class="card-item__left-header">
                                             <div class="task-name">${task.name}</div>
@@ -129,12 +133,16 @@
                                             <div class="task-text">
                                                 ${task.taskText}
                                             </div>
-                                            <form method="post" action="/takeTask">
-                                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                                <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
-                                                <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
-                                                <div><input class="take-button" type="submit" value="+"/></div>
-                                            </form>
+                                            <#if project?has_content>
+                                                <#if !project.deleted>
+                                                    <form method="post" action="/takeTask">
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                        <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                        <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                        <div><input class="take-button" type="submit" value="+"/></div>
+                                                    </form>
+                                                </#if>
+                                            </#if>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +158,7 @@
                         <#list tasks as task>
                             <#if task.status?substring(0,1)='T'>
                                 <div class="card-item">
-                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="person-img"><img src="/img/${task.taskOwner.avatar}"></div>
                                     <div class="card-item__right">
                                         <div class="card-item__left-header">
                                             <div class="task-name">${task.name}</div>
@@ -160,20 +168,24 @@
                                             <div class="task-text">
                                                 ${task.taskText}
                                             </div>
-                                            <div class="buttons">
-                                                <form method="post" action="/takeTask">
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                                    <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
-                                                    <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
-                                                    <div><input class="take-button" type="submit" value="+"/></div>
-                                                </form>
-                                                <form method="post" action="/doneTask">
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                                    <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
-                                                    <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
-                                                    <div><input class="take-button complete" type="submit" value="&#10004;"/></div>
-                                                </form>
-                                            </div>
+                                            <#if project?has_content>
+                                                <#if !project.deleted>
+                                                    <div class="buttons">
+                                                        <form method="post" action="/takeTask">
+                                                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                            <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                            <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                            <div><input class="take-button" type="submit" value="+"/></div>
+                                                        </form>
+                                                        <form method="post" action="/doneTask">
+                                                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                                            <input type="hidden" name="projectId" value="<#if project?has_content>${project.id}</#if>"/>
+                                                            <input type="hidden" name="taskId" value="<#if project?has_content>${task.id}</#if>"/>
+                                                            <div><input class="take-button complete" type="submit" value="&#10004;"/></div>
+                                                        </form>
+                                                    </div>
+                                                </#if>
+                                            </#if>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +201,13 @@
                         <#list tasks as task>
                             <#if task.status?substring(0,1)='D'>
                                 <div class="card-item">
-                                    <div class="person-img"><img src="/img/${avatar}"></div>
+                                    <div class="person-img"><img src="/img/
+                                        <#if task.taskOwner?has_content>
+                                            ${task.taskOwner.avatar}
+                                            <#else>
+                                            ${task.taskStarter.avatar}
+                                        </#if>">
+                                    </div>
                                     <div class="card-item__right">
                                         <div class="card-item__left-header">
                                             <div class="task-name">${task.name}</div>

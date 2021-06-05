@@ -10,6 +10,7 @@ const result = document.querySelector('.result');
 //Кол-во приглашений, задач и проектов
 document.querySelector('.invitations span').innerHTML = invitations.length;
 document.querySelector('.tasks span').innerHTML = tasks.length;
+document.querySelector('.project-info__tasks span').innerHTML = tasks.length;
 
 //Pie chart
 drawCanvas();

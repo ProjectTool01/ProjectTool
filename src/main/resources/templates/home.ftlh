@@ -85,15 +85,18 @@
 							<div class="project-description"><#if project?has_content>${project.projectText}</#if></div>
 							<div class="project-owner">Владелец проекта:<span><#if project?has_content>${project.projectOwner.username}</#if></span></div>
 							<div class="project-identificator">Идентификатор проекта:<span><#if project?has_content>${project.projectIdentifier}</#if></span></div>
-							<div class="project-info__members">Members: <span>9</span></div>
-							<div class="project-info__tasks">Tasks: <span>100</span></div>
-							<div class=""><#if project?has_content>${project.deleted?c}</#if></div>
+							<div class="project-info__members">Members: <span><#if project?has_content>${project.users?size}</#if></span></div>
+							<div class="project-info__tasks">Tasks: <span></span></div>
 						</div>
-						<form action="/deleteProject" method="post">
-							<input type="hidden" name="id" value="<#if project?has_content>${project.id}</#if>"/>
-							<input type="hidden" name="_csrf" value="${_csrf.token}"/>
-							<input class="button decline" type="submit" value="Close Project"/>
-						</form>
+						<#if project?has_content>
+							<#if !project.deleted>
+								<form action="/deleteProject" method="post">
+									<input type="hidden" name="id" value="<#if project?has_content>${project.id}</#if>"/>
+									<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+									<input class="button decline" type="submit" value="Close Project"/>
+								</form>
+							</#if>
+						</#if>
 					</div>
 					<div class="project-info__right">
 						<canvas class="pie-chart" width="200" height="200"></canvas>
@@ -152,7 +155,8 @@
 						<#list projects as item>
 							<a href="/home?pid=${item.id}">
 								<div class="card-item">
-									<div class="person-img"><img src="/img/${avatar}"></div>
+									<div class="person-img"><img src="/img/${item.projectOwner.avatar}">
+									</div>
 									<div class="select-project__info">
 										<div class="project-name">${item.name}</div>
 										<div class="project-description">${item.projectText}</div>
