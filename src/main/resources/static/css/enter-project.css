@@ -1,8 +1,8 @@
-.create-project__modal.active {
+.enter-project__modal.active {
     opacity: 1;
     z-index: 1;
 }
 
-.create-project__wrap.active {
+.enter-project__wrap.active {
     transform: translateY(0px);
 }

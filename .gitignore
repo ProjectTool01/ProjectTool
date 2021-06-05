@@ -7,3 +7,4 @@ log.txt
 .settings/
 .idea/
 /uploads/
+src/main/resources/application.properties

@@ -7,9 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/user-list.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/modal.css">
     <link rel="stylesheet" type="text/css" href="../static/css/add-project.css">
     <link rel="stylesheet" type="text/css" href="../static/css/change-profile.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/select-project.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/enter-project.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/my-profile.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/user-list.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>ProjectTool</title>
 </head>
@@ -51,13 +55,14 @@
             </div>
 
             <div class="header_right">
-                <div class="add_project">Добавить Проект</div>
+                <div class="header-button enter_project">Вступить в проект</div>
+                <div class="header-button add_project">Добавить Проект</div>
                 <div class="user__block">
                     <div class="user"><img src="/img/${avatar}" alt=""></div>
                     <div class="user__dropdown-menu" id="dropdown">
-                        <a class="dropdown-menu__item settings">Настройки</a>
+                        <a class="dropdown-menu__item my-profile">Мой профиль</a>
                         <hr class="dropdown-menu__line">
-                        <a class="dropdown-menu__item">Помощь</a>
+                        <a class="dropdown-menu__item settings">Настройки</a>
                         <hr class="dropdown-menu__line">
                         <form action="/logout" method="post" class="dropdown-menu__item">
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -93,9 +98,9 @@
         </div>
         <!--------------------------- content --------------------------->
 
-        <!--------------------------- modal --------------------------->
-        <div class="modal-window" data-close="true">
-            <div class="modal-window__wrap">
+        <!--------------------------- create project --------------------------->
+        <div class="modal create-project__modal" data-close="true">
+            <div class="modal-wrap create-project__wrap">
                 <button class="close-modal" data-close="true">&times;</button>
                 <h2 class="modal-title">Создание проекта</h2>
                 <form class="modal-form" action="/createProject" method="post">
@@ -112,11 +117,11 @@
                 </form>
             </div>
         </div>
-        <!--------------------------- modal --------------------------->
+        <!--------------------------- create project --------------------------->
 
         <!--------------------------- user --------------------------->
-        <div class="modal-user" data-close="true">
-            <div class="modal-user__wrap">
+        <div class="modal user-modal" data-close="true">
+            <div class="modal-wrap user-modal__wrap">
                 <button class="close-modal" data-close="true">&times;</button>
                 <h2 class="modal-title">Изменение профиля</h2>
                 <form class="modal-form" enctype="multipart/form-data" action="/settings" method="post">
@@ -141,10 +146,41 @@
             </div>
         </div>
         <!--------------------------- user --------------------------->
+
+        <!--------------------------- create project --------------------------->
+        <div class="modal enter-project__modal" data-close="true">
+            <div class="modal-wrap enter-project__wrap">
+                <button class="close-modal" data-close="true">&times;</button>
+                <h2 class="modal-title">Вступить в проект</h2>
+                <form class="modal-form" action="/addProject" method="post">
+                    <div class="input-wrap">
+                        <input class="input project-identifier" name="projectIdentifier" placeholder="Идентификатор проекта">
+                        <i class="fa fa-times" aria-hidden="true" onclick="clearInput('project-identifier')"></i>
+                    </div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <input class="submit disable project-submit" type="submit" value="Вступить в проект"/>
+                </form>
+            </div>
+        </div>
+        <!--------------------------- create project --------------------------->
+
+        <!--------------------------- my profile --------------------------->
+        <div class="modal my-profile__modal" data-close="true">
+            <div class="modal-wrap my-profile__wrap">
+                <button class="close-modal" data-close="true">&times;</button>
+                <h2 class="modal-title">Данные пользователя</h2>
+                Электронная почта: ${email!}<br/>
+                Имя пользователя: ${username!}<br/>
+                Никнейм: ${name!}<br/>
+            </div>
+        </div>
+        <!--------------------------- my profile --------------------------->
     </div>
     <script src="../static/js/main.js"></script>
-    <script src="../static/js/add-project.js"></script>
-    <script src="../static/js/change-profile.js"></script>
     <script src="../static/js/user-list.js"></script>
+    <script src="../static/js/my-profile.js"></script>
+    <script src="../static/js/change-profile.js"></script>
+    <script src="../static/js/enter-project.js"></script>
+    <script src="../static/js/add-project.js"></script>
 </body>
 </html>
