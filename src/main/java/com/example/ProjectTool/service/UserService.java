@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Здравствуйте, %s! \n" +
-                            "Ваша ссылка на активацию: http://localhost:8080/activate/%s",
+                            "Ваша ссылка на активацию: http://localhost/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );

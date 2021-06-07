@@ -106,7 +106,7 @@
                     <#list projects as item>
                         <a href="/tasks?pid=${item.id}">
                             <div class="card-item">
-                                <div class="person-img"><img src="/img/${avatar}"></div>
+                                <div class="person-img"><img src="/img/${item.projectOwner.avatar}"></div>
                                 <div class="select-project__info">
                                     <div class="project-name">${item.name}</div>
                                     <div class="project-description">${item.projectText}</div>

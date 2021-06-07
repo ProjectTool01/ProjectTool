@@ -126,9 +126,11 @@ public class ProjectController {
                                  @RequestParam String text,
                                  @RequestParam String id) {
 
-        long projectId = Long.parseLong(id);
-        Project project = projectRepo.findById(projectId);
-        projectService.createTask(project, user, name, text);
+        if(!name.isEmpty() && !text.isEmpty()){
+            long projectId = Long.parseLong(id);
+            Project project = projectRepo.findById(projectId);
+            projectService.createTask(project, user, name, text);
+        }
         return "redirect:/tasks?pid=" + id;
     }
 
